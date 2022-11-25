@@ -106,7 +106,7 @@ void Bestiole::bouge( int xLim, int yLim )
 }
 
 
-void Bestiole::action( Milieu & monMilieu )
+void Bestiole::action(Milieu & monMilieu)
 {
 
    bouge( monMilieu.getWidth(), monMilieu.getHeight() );
@@ -136,6 +136,7 @@ bool operator==( const Bestiole & b1, const Bestiole & b2 )
 
 
 bool Bestiole::jeTeVois( const Bestiole & b ) const
+
 {
 
    double         dist;
@@ -144,4 +145,34 @@ bool Bestiole::jeTeVois( const Bestiole & b ) const
    dist = std::sqrt( (x-b.x)*(x-b.x) + (y-b.y)*(y-b.y) );
    return ( dist <= LIMITE_VUE );
 
+}
+
+void Bestiole::update(Bestiole * pBestiole)
+{
+
+}
+
+void Bestiole::rebondit(Bestiole * pBestiole)
+{
+
+}
+
+Bestiole Bestiole::clone()
+{
+   
+}  
+
+bool Bestiole::hasOreille()
+{
+
+}
+
+bool Bestiole::hasOeil()
+{
+   
+}
+
+void Bestiole::vieillit()
+{
+   
 }
