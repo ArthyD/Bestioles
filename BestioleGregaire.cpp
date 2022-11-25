@@ -1,4 +1,4 @@
-#include "bestiolegregaire.h"
+#include "BestioleGregaire.h"
 
 void bestioleGregaire::update(vector<bestiole*> vectorBestioleProche){
     double moyenne = 0;

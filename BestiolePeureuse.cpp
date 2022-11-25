@@ -1,7 +1,7 @@
-#include "bestiolepeureuse.h"
+#include "BestiolePeureuse.h"
 #include<cmath>
 
-void bestiolePeureuse::update(vector<bestiole*> vectorBestioleProche){
+void BestiolePeureuse::update(vector<bestiole*> vectorBestioleProche){
     if (fuite){
         if (compteur == 0) {
             fuite = false;
