@@ -3,13 +3,15 @@
 #include "Bestiole.h"
 #include <vector>
 
-class bestiolePeureuse : public bestiole {
+class BestiolePeureuse : public Bestiole {
     private :
-        int agoraphobe;
+        long unsigned int agoraphobe;
         int compteur;
         bool fuite;
     public :
-        void update(vector<bestiole*> vectorBestioleProche);
+        void update(std::vector<Bestiole>& vectorBestioleProche);
+        BestiolePeureuse(void );
+        ~BestiolePeureuse( void );
 };
 
 #endif

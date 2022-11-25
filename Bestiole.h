@@ -24,7 +24,7 @@ private :
    static int              next;
 
    
-private :
+protected :
    int               identite;
    int               x, y;
    double            cumulX, cumulY;

@@ -1,21 +1,25 @@
 #include "BestiolePeureuse.h"
-#include<cmath>
+#include <cmath>
 
-void BestiolePeureuse::update(vector<bestiole*> vectorBestioleProche){
+BestiolePeureuse::BestiolePeureuse(){};
+
+BestiolePeureuse::~BestiolePeureuse(){};
+
+void BestiolePeureuse::update(std::vector<Bestiole>& vectorBestioleProche){
     if (fuite){
         if (compteur == 0) {
             fuite = false;
-            this.setVitesse(this.getVitesse()/2);
+            vitesse = vitesse/2;
         } else {
             compteur -=1;
         }
-    } else if(vectorBestioleProche.size()>=agoraphobe){
+    } else if(vectorBestioleProche.size() >= agoraphobe){
         double pi = M_PI;
-        if (this.getDirection()< pi){
-            this.setDirection(this.getDirection()+pi);
+        if (orientation < pi){
+            orientation += pi;
         } else {
-            this.setDirection(this.getDirection()-pi);
+            orientation -= pi;
         }
-        this.setVitesse(this.getVitesse()*2);
+        vitesse = vitesse * 2;
     }
 }
