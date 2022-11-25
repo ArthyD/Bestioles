@@ -15,16 +15,15 @@ class Milieu;
 
 class Bestiole
 {
-
-private :
+   
+protected :
    static const double     AFF_SIZE;
    static const double     MAX_VITESSE;
    static const double     LIMITE_VUE;
 
    static int              next;
 
-   
-protected :
+
    int               identite;
    int               x, y;
    double            cumulX, cumulY;

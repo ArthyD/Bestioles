@@ -69,7 +69,7 @@ void Milieu::phaseAction( void )
       it->action( *this );
       it->draw( *this );
 
-   } // for
+   } 
 
 }
 

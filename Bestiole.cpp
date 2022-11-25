@@ -6,11 +6,11 @@
 #include <cmath>
 
 
-const double      Bestiole::AFF_SIZE = 8.;
-const double      Bestiole::MAX_VITESSE = 10.;
-const double      Bestiole::LIMITE_VUE = 30.;
+// const double      Bestiole::AFF_SIZE = 8.;
+// const double      Bestiole::MAX_VITESSE = 10.;
+// const double      Bestiole::LIMITE_VUE = 30.;
 
-int               Bestiole::next = 0;
+// int               Bestiole::next = 0;
 
 
 Bestiole::Bestiole( void )

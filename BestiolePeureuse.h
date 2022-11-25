@@ -5,9 +5,9 @@
 
 class BestiolePeureuse : public Bestiole {
     private :
-        long unsigned int agoraphobe;
-        int compteur;
-        bool fuite;
+        long unsigned int agoraphobe = 1;
+        int compteur = 100;
+        bool fuite = false;
     public :
         void update(std::vector<Bestiole>& vectorBestioleProche);
         BestiolePeureuse(void );
