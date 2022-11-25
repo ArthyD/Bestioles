@@ -4,6 +4,7 @@
 
 #include "UImg.h"
 #include <iostream>
+#include <vector>
 
 
 using namespace std;
@@ -66,7 +67,7 @@ public :                                           // Forme canonique :
 
    friend bool operator==( const Bestiole & b1, const Bestiole & b2 );
 
-   void update( Bestiole * b );
+   void update(std::vector<Bestiole>& b) {};
    void rebondit( Bestiole * b );
    Bestiole clone();
    Bestiole clone(Bestiole b);
