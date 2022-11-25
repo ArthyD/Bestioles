@@ -30,6 +30,18 @@ Bestiole::Bestiole( void )
    couleur[ 1 ] = static_cast<int>( static_cast<double>( rand() )/RAND_MAX*230. );
    couleur[ 2 ] = static_cast<int>( static_cast<double>( rand() )/RAND_MAX*230. );
 
+   persoMult = false ;
+   taille = 1 ;
+
+   champOeil =0;
+   champOreille =0;
+   distanceOeil = 0;
+   distanceOreille = 0;
+   capaciteOeil = 0;
+   capaciteOreille = 0;
+   coeffCamouflage = 0;
+   coeffCarapace = 1;
+   coeffNageoire = 1;
 }
 
 
@@ -147,32 +159,52 @@ bool Bestiole::jeTeVois( const Bestiole & b ) const
 
 }
 
-void Bestiole::update(Bestiole * pBestiole)
-{
-
-}
-
 void Bestiole::rebondit(Bestiole * pBestiole)
 {
-
+   this->vitesse*=-1;
 }
 
 Bestiole Bestiole::clone()
 {
-   
-}  
+   return(Bestiole(*this));
+} 
+
+Bestiole Bestiole::clone(Bestiole bestiolePrototype)
+{
+   return(Bestiole(bestiolePrototype));
+} 
 
 bool Bestiole::hasOreille()
 {
-
+   return (this->capaciteOreille!=0);
 }
 
 bool Bestiole::hasOeil()
 {
-   
+   return (this->capaciteOeil!=0);
 }
 
 void Bestiole::vieillit()
 {
-   
+   this->anneesRestantes-=1;
+}
+
+int Bestiole::getX()
+{
+   return (this->x);
+}
+
+int Bestiole::getY()
+{
+   return (this->y);
+}
+
+double Bestiole::getOrientation()
+{
+   return (this->orientation);
+}
+
+double Bestiole::getVitesse()
+{
+   return (this->vitesse);
 }

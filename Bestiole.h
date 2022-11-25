@@ -22,19 +22,7 @@ private :
 
    static int              next;
 
-   const bool persoMult;
-   const int taille;
-
-   const double champOeil;
-   const double champOreille;
-   const double distanceOeil;
-   const double distanceOreille;
-   const double capaciteOeil;
-   const double capaciteOreille;
-   const double coeffCamouflage;
-   const double coeffCarapace;
-   const double coeffNageoire;
-
+   
 private :
    int               identite;
    int               x, y;
@@ -45,6 +33,19 @@ private :
    T               * couleur;
 
    int anneesRestantes;
+
+   bool persoMult;
+   int taille;
+
+   double champOeil;
+   double champOreille;
+   double distanceOeil;
+   double distanceOreille;
+   double capaciteOeil;
+   double capaciteOreille;
+   double coeffCamouflage;
+   double coeffCarapace;
+   double coeffNageoire;
 
 
 private :
@@ -68,10 +69,14 @@ public :                                           // Forme canonique :
    void update( Bestiole * b );
    void rebondit( Bestiole * b );
    Bestiole clone();
+   Bestiole clone(Bestiole b);
    bool hasOeil();
    bool hasOreille();
    void vieillit();
-
+   int getX();
+   int getY();
+   double getOrientation();
+   double getVitesse();
 };
 
 
