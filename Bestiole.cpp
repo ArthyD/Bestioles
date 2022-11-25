@@ -208,3 +208,13 @@ double Bestiole::getVitesse()
 {
    return (this->vitesse);
 }
+
+void Bestiole::setVitesse(double v)
+{
+   this->vitesse = v;
+}
+void Bestiole::setOrientation(double o)
+{
+
+   this->orientation = orientation;
+}
