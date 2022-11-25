@@ -46,8 +46,6 @@ public :                                           // Forme canonique :
 
    void initCoords( int xLim, int yLim );
 
-   bool testdeArthur();
-
    friend bool operator==( const Bestiole & b1, const Bestiole & b2 );
 
 
