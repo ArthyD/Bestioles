@@ -3,8 +3,8 @@
 
 
 #include "UImg.h"
-
 #include <iostream>
+
 
 using namespace std;
 
@@ -22,6 +22,19 @@ private :
 
    static int              next;
 
+   const bool persoMult;
+   const int taille;
+
+   const double champOeil;
+   const double champOreille;
+   const double distanceOeil;
+   const double distanceOreille;
+   const double capaciteOeil;
+   const double capaciteOreille;
+   const double coeffCamouflage;
+   const double coeffCarapace;
+   const double coeffNageoire;
+
 private :
    int               identite;
    int               x, y;
@@ -31,8 +44,12 @@ private :
 
    T               * couleur;
 
+   int anneesRestantes;
+
+
 private :
    void bouge( int xLim, int yLim );
+
 
 public :                                           // Forme canonique :
    Bestiole( void );                               // Constructeur par defaut
@@ -48,7 +65,12 @@ public :                                           // Forme canonique :
 
    friend bool operator==( const Bestiole & b1, const Bestiole & b2 );
 
-
+   void update( Bestiole * b );
+   void rebondit( Bestiole * b );
+   Bestiole clone();
+   bool hasOeil();
+   bool hasOreille();
+   void vieillit();
 
 };
 
