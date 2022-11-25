@@ -10,6 +10,7 @@ void bestiolePeureuse::update(vector<bestiole*> vectorBestioleProche){
             compteur -=1;
         }
     } else if(vectorBestioleProche.size()>=agoraphobe){
+        double pi = M_PI;
         if (this.getDirection()< pi){
             this.setDirection(this.getDirection()+pi);
         } else {

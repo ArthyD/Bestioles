@@ -1,6 +1,6 @@
 #include "bestiolegregaire.h"
 
-void bestiolePeureuse::update(vector<bestiole*> vectorBestioleProche){
+void bestioleGregaire::update(vector<bestiole*> vectorBestioleProche){
     double moyenne = 0;
     for (auto & bestioleProche : vectorBestioleProche){
             moyenne += bestioleProche.getDirection();
