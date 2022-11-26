@@ -1,11 +1,11 @@
-#include "bestiolefactory.h"
-#include "bestiolepeureuse.h"
-#include "bestioleprevoyante.h"
-#include "bestiolegregaire.h"
-#include "bestiolekamikaze.h"
+#include "BestioleFactory.h"
+#include "BestiolePeureuse.h"
+#include "BestiolePrevoyante.h"
+#include "BestioleGregaire.h"
+#include "BestioleKamikaze.h"
 #include <stdlib.h>
 
-bestiole* bestioleFactory::creationBestiole(bool persoMult, int type, bool aOreille, bool aYeux, bool aCamouflage, bool aCarapace, bool aNageoires){
+Bestiole* BestioleFactory::creationBestiole(bool persoMult, int type, bool aOreille, bool aYeux, bool aCamouflage, bool aCarapace, bool aNageoires){
     if (aOreille){
         double distanceOreille = rand() % (distanceOreilleMax - distanceOreilleMin + 1);
         double capaciteOreille = rand() % (capaciteOreilleMax - capaciteOreilleMin + 1);
@@ -48,14 +48,14 @@ bestiole* bestioleFactory::creationBestiole(bool persoMult, int type, bool aOrei
     double taille = rand() % (taillemax + 1);
     //création de la bestiole choisie via le type
     if (type==1){
-        return new bestioleKamikaze(persoMult, age, champOeil, distanceOeil, distanceOreille, capaciteOeil, capaciteOreille, coeffCamouflage, coeffCarapace, coeffNageoire);
+        return new BestioleKamikaze(persoMult, age, champOeil, distanceOeil, distanceOreille, capaciteOeil, capaciteOreille, coeffCamouflage, coeffCarapace, coeffNageoire);
     } if (type ==2){
-        return new bestioleGregaire(persoMult, age, champOeil, distanceOeil, distanceOreille, capaciteOeil, capaciteOreille, coeffCamouflage, coeffCarapace, coeffNageoire);
+        return new BestioleGregaire(persoMult, age, champOeil, distanceOeil, distanceOreille, capaciteOeil, capaciteOreille, coeffCamouflage, coeffCarapace, coeffNageoire);
     } if (type ==3){
-        return new bestiolePrevoyante(persoMult, age, champOeil, distanceOeil, distanceOreille, capaciteOeil, capaciteOreille, coeffCamouflage, coeffCarapace, coeffNageoire);
+        return new BestiolePrevoyante(persoMult, age, champOeil, distanceOeil, distanceOreille, capaciteOeil, capaciteOreille, coeffCamouflage, coeffCarapace, coeffNageoire);
     } if (type ==4) {
         int agoraphobie = rand() % (agoramax - agoramin +1);
-        return new bestiolePeureuse(persoMult, age, champOeil, distanceOeil, distanceOreille, capaciteOeil, capaciteOreille, coeffCamouflage, coeffCarapace, coeffNageoire, agoraphobie);
+        return new BestiolePeureuse(persoMult, age, champOeil, distanceOeil, distanceOreille, capaciteOeil, capaciteOreille, coeffCamouflage, coeffCarapace, coeffNageoire, agoraphobie);
     } else {
         return NULL;
     }

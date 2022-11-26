@@ -1,8 +1,8 @@
 #ifndef _bestiolefactory_
 #define _bestiolefactory_
-#include "bestiole.h"
+#include "Bestiole.h"
 
-class bestioleFactory {
+class BestioleFactory {
     private :
         //yeux
         double champoOeilMax;
@@ -34,9 +34,9 @@ class bestioleFactory {
         double agemax;
         
     public :
-    bestiole* creationBestiole(int type, bool aOreille, bool aYeux, bool aCamouflage, bool aCarapace, bool aNageoires);
-    bestioleFactory();
-    ~bestioleFactory();
+    Bestiole* creationBestiole(int type, bool aOreille, bool aYeux, bool aCamouflage, bool aCarapace, bool aNageoires);
+    BestioleFactory();
+    ~BestioleFactory();
 };
 
 #endif
