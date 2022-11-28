@@ -1,10 +1,11 @@
 #ifndef _bestiolegregaire_
 #define _bestiolegregaire_
-#include "bestiole.h"
+#include "Bestiole.h"
 #include <vector>
 
-class bestioleGregaire : public bestiole {        
-public :        
-  void update(vector<bestiole*> vectorBestioleProche);        
+class BestioleGregaire : public Bestiole {        
+public :  
+  BestioleGregaire(bool persoMult, int age, double champOeil, double distanceOeil, double distanceOreille, double capaciteOeil, double capaciteOreille, double coeffCamouflage, double coeffCarapace, double coeffNageoire);      
+  void update(vector<Bestiole*> vectorBestioleProche);        
 };
 #endif

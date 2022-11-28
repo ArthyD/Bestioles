@@ -11,6 +11,7 @@ class BestiolePeureuse : public Bestiole {
     public :
         void update(std::vector<Bestiole>& vectorBestioleProche);
         BestiolePeureuse(void );
+        BestiolePeureuse(bool persoMult, int age, double champOeil, double distanceOeil, double distanceOreille, double capaciteOeil, double capaciteOreille, double coeffCamouflage, double coeffCarapace, double coeffNageoire, int agoraphobe);
         ~BestiolePeureuse( void );
 };
 

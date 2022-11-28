@@ -2,61 +2,71 @@
 #include "BestiolePeureuse.h"
 #include "BestiolePrevoyante.h"
 #include "BestioleGregaire.h"
-#include "BestioleKamikaze.h"
+//#include "BestioleKamikaze.h"
 #include <stdlib.h>
+#include <time.h>
+
+
+double distanceOreille = 0;
+double capaciteOreille = 0;
+double champOeil = 0;
+double distanceOeil = 0;
+double capaciteOeil = 0;
+double coeffCamouflage = 0;
+double coeffCarapace = 0;
+double coeffDebuffCarapace = 0;
+double coeffNageoire = 1;
+
+double BestioleFactory::randomDouble(double min, double max) {
+    std::srand(std::time(nullptr));
+    return (((double)rand()*(max) / RAND_MAX) - max) *(-1);
+}
 
 Bestiole* BestioleFactory::creationBestiole(bool persoMult, int type, bool aOreille, bool aYeux, bool aCamouflage, bool aCarapace, bool aNageoires){
+    
     if (aOreille){
-        double distanceOreille = rand() % (distanceOreilleMax - distanceOreilleMin + 1);
-        double capaciteOreille = rand() % (capaciteOreilleMax - capaciteOreilleMin + 1);
-    } else {
-        double distanceOreille = 0;
-        double capaciteOreille = 0;
+        distanceOreille = randomDouble(distanceOreilleMin,distanceOreilleMax); 
+        capaciteOreille = randomDouble(capaciteOreilleMin,capaciteOreilleMax);
     }
     
     if (aYeux) {
-        double champOeil = rand() % (champoOeilMax - champOeilMin + 1);
-        double distanceOeil = rand() % (distanceOeilMax - distanceOeilMin + 1);
-        double capaciteOeil = rand() % (capaciteOeilMax - capaciteOeilMin + 1);
-    } else {
-        double champOeil = 0;
-        double distanceOeil = 0;
-        double capaciteOeil = 0;
+        champOeil = randomDouble(champOeilMin,champOeilMax); 
+        distanceOeil = randomDouble(distanceOeilMin,distanceOeilMax); 
+        capaciteOeil = randomDouble(capaciteOeilMin,capaciteOeilMax); 
     }
+       
     
     if (aCamouflage){
-        double coeffCamouflage = rand() % (coeffCamouflageMax - coeffCamouflageMin + 1);
-    } else {
-        double coeffCamouflage = 0;
+        coeffCamouflage = randomDouble(coeffCamouflageMin,coeffCamouflageMax); 
     }
     
     if (aCarapace){
-        double coeffCarapace = rand() % coeffCarapaceMax;
-        double coeffDebuffCarapace = rand() % coeffDebuffCarapaceMax;
-    } else {
-        double coeffCarapace = 0;
-        double coeffDebuffCarapace = 0;
-    }
+        coeffCarapace = randomDouble(0.0,coeffCarapaceMax); 
+        coeffDebuffCarapace = randomDouble(0.0, coeffDebuffCarapace);
+    } 
     
     if (aNageoires){
-        double coeffNageoire = rand() % coeffNageoire;
-    } else {
-        double coeffNageoire = 1;
-    }
+        coeffNageoire = randomDouble(1.0,100.0);
+    } 
     
-    double age = rand() % (agemax + 1);
-    double taille = rand() % (taillemax + 1);
+    int age = rand() % (agemax + 1);
+    double taille = randomDouble(1.0,taillemax);
     //création de la bestiole choisie via le type
-    if (type==1){
-        return new BestioleKamikaze(persoMult, age, champOeil, distanceOeil, distanceOreille, capaciteOeil, capaciteOreille, coeffCamouflage, coeffCarapace, coeffNageoire);
-    } if (type ==2){
+    // if (type==1){
+    //     return new BestioleKamikaze(persoMult, age, champOeil, distanceOeil, distanceOreille, capaciteOeil, capaciteOreille, coeffCamouflage, coeffCarapace, coeffNageoire);
+    // } 
+    if (type ==2){
         return new BestioleGregaire(persoMult, age, champOeil, distanceOeil, distanceOreille, capaciteOeil, capaciteOreille, coeffCamouflage, coeffCarapace, coeffNageoire);
-    } if (type ==3){
+    } 
+    else if (type ==3){
         return new BestiolePrevoyante(persoMult, age, champOeil, distanceOeil, distanceOreille, capaciteOeil, capaciteOreille, coeffCamouflage, coeffCarapace, coeffNageoire);
-    } if (type ==4) {
-        int agoraphobie = rand() % (agoramax - agoramin +1);
+    } 
+    else if (type ==4) {
+        int agoraphobie = rand() % (agoraMax - agoraMin +1);
         return new BestiolePeureuse(persoMult, age, champOeil, distanceOeil, distanceOreille, capaciteOeil, capaciteOreille, coeffCamouflage, coeffCarapace, coeffNageoire, agoraphobie);
     } else {
         return NULL;
     }
 }
+
+

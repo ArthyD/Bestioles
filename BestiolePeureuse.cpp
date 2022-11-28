@@ -1,6 +1,9 @@
 #include "BestiolePeureuse.h"
 #include <cmath>
-
+#include <iostream>
+BestiolePeureuse::BestiolePeureuse(bool persoMult, int age, double champOeil, double distanceOeil, double distanceOreille, double capaciteOeil, double capaciteOreille, double coeffCamouflage, double coeffCarapace, double coeffNageoire, int agoraphobe){
+    std::cout << "Create bestiole peureuse" << std::endl;
+}  
 BestiolePeureuse::BestiolePeureuse(){};
 
 BestiolePeureuse::~BestiolePeureuse(){};

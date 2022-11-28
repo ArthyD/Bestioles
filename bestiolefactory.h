@@ -5,7 +5,7 @@
 class BestioleFactory {
     private :
         //yeux
-        double champoOeilMax;
+        double champOeilMax;
         double champOeilMin;
         double distanceOeilMax;
         double distanceOeilMin;
@@ -26,17 +26,20 @@ class BestioleFactory {
         double coeffCamouflageMin;
 
         //bestiolepeureuse
-        double agoraMin;
-        double agoraMax;
+        int agoraMin;
+        int agoraMax;
 
         // autre :
         double taillemax;
-        double agemax;
+        int agemax;
         
     public :
-    Bestiole* creationBestiole(int type, bool aOreille, bool aYeux, bool aCamouflage, bool aCarapace, bool aNageoires);
+    Bestiole* creationBestiole(bool persoMult, int type, bool aOreille, bool aYeux, bool aCamouflage, bool aCarapace, bool aNageoires);
     BestioleFactory();
     ~BestioleFactory();
+    double randomDouble(double min, double max);
+
+    
 };
 
 #endif
