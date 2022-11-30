@@ -4,6 +4,7 @@
 
 #include "UImg.h"
 #include "Bestiole.h"
+#include "BestiolePeureuse.h"
 
 #include <iostream>
 #include <list>
@@ -20,7 +21,7 @@ private :
    static const T          white[];
 
    int                     width, height;
-   std::list<Bestiole>   listeBestioles;
+   std::list<BestiolePeureuse>   listeBestioles;
 
    float                   PourcentageKamikaze = 0.15;
    float                   PourcentagePeureuse = 0.25;
@@ -41,7 +42,7 @@ public :
    void phaseDetection( void );
    void naissanceAlea( void );  
 
-   void addMember( const Bestiole & b ) { listeBestioles.push_back(b); listeBestioles.back().initCoords(width, height); }
+   void addMember( const BestiolePeureuse & b ) { listeBestioles.push_back(b); listeBestioles.back().initCoords(width, height); }
    int nbVoisins( const Bestiole & b );
 
 };

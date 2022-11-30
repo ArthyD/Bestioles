@@ -2,6 +2,7 @@
 #define _bestiolepeureuse_
 #include "Bestiole.h"
 #include <vector>
+#include <iostream>
 
 class BestiolePeureuse : public Bestiole {
     private :

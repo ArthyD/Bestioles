@@ -18,7 +18,7 @@ Bestiole::Bestiole( void )
 
    identite = ++next;
 
-   cout << "const Bestiole (" << identite << ") par defaut" << endl;
+   //cout << "const Bestiole (" << identite << ") par defaut" << endl;
 
    x = y = 0;
    cumulX = cumulY = 0.;
@@ -50,7 +50,7 @@ Bestiole::Bestiole( const Bestiole & b )
 
    identite = ++next;
 
-   cout << "const Bestiole (" << identite << ") par copie" << endl;
+   //cout << "const Bestiole (" << identite << ") par copie" << endl;
 
    x = b.x;
    y = b.y;
@@ -68,7 +68,7 @@ Bestiole::~Bestiole( void )
 
    delete[] couleur;
 
-   cout << "dest Bestiole" << endl;
+   //cout << "dest Bestiole" << endl;
 
 }
 

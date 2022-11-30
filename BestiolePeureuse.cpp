@@ -2,8 +2,8 @@
 #include <cmath>
 
 const double      Bestiole::AFF_SIZE = 8.;
-const double      Bestiole::MAX_VITESSE = 10.;
-const double      Bestiole::LIMITE_VUE = 30.;
+const double      Bestiole::MAX_VITESSE = 8.;
+const double      Bestiole::LIMITE_VUE = 50.;
 
 int               Bestiole::next = 0;
 
@@ -13,7 +13,7 @@ BestiolePeureuse::BestiolePeureuse(void)
 
    identite = ++next;
 
-   cout << "const Bestiole (" << identite << ") par defaut" << endl;
+   cout << "Naissance Bestiole (" << identite << ") peureuse" << endl;
 
    x = y = 0;
    cumulX = cumulY = 0.;
@@ -38,9 +38,9 @@ BestiolePeureuse::BestiolePeureuse(void)
    coeffCarapace = 1;
    coeffNageoire = 1;
 
-   agoraphobe = 1;
+   agoraphobe = 2;
    fuite = false;
-   compteur = 100;
+   compteur = 1000;
 }
 
 BestiolePeureuse::~BestiolePeureuse(){};
@@ -49,17 +49,19 @@ void BestiolePeureuse::update(std::vector<Bestiole>& vectorBestioleProche){
     if (fuite){
         if (compteur == 0) {
             fuite = false;
-            vitesse = vitesse/2;
+            vitesse = vitesse / 2;
         } else {
             compteur -=1;
         }
     } else if(vectorBestioleProche.size() >= agoraphobe){
         double pi = M_PI;
+        fuite = true;
         if (orientation < pi){
             orientation += pi;
         } else {
             orientation -= pi;
         }
         vitesse = vitesse * 2;
+        compteur = 1000;
     }
 }
