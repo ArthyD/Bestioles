@@ -46,17 +46,17 @@ void Milieu::phaseDetection ( void ){
    std::vector<Bestiole> bestiolesAlentours;
    for ( std::list<BestiolePeureuse>::iterator it1 = listeBestioles.begin() ; it1 != listeBestioles.end() ; it1++ )
    {
-      for ( std::list<BestiolePeureuse>::iterator it2 = listeBestioles.begin() ; it2 != listeBestioles.end() ; it2++ ){
-         if (it1 != it2) {
-            bool verif = it1->jeTeVois(*it2);
-            if (verif) 
+      for ( std::list<BestiolePeureuse>::iterator it2 = listeBestioles.begin() ; it2 != listeBestioles.end() ; it2++ )
+      {
+         if (it1->getIdentite() != it2->getIdentite()) {
+            if ( it1->jeTeVois(*it2) ) 
             {
                bestiolesAlentours.push_back(*it2);
             }
             it1->update(bestiolesAlentours);
          }
-      bestiolesAlentours.clear();
       }
+      bestiolesAlentours.clear();
       }
 }
 

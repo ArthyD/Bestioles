@@ -77,6 +77,7 @@ public :                                           // Forme canonique :
    int getY();
    double getOrientation();
    double getVitesse();
+   int getIdentite();
 
    void setOrientation(double o);
    void setVitesse(double v);

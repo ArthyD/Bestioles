@@ -6,11 +6,11 @@
 #include <cmath>
 
 
-// const double      Bestiole::AFF_SIZE = 8.;
-// const double      Bestiole::MAX_VITESSE = 10.;
-// const double      Bestiole::LIMITE_VUE = 30.;
+const double      Bestiole::AFF_SIZE = 8.;
+const double      Bestiole::MAX_VITESSE = 10.;
+const double      Bestiole::LIMITE_VUE = 30.;
 
-// int               Bestiole::next = 0;
+int               Bestiole::next = 0;
 
 
 Bestiole::Bestiole( void )
@@ -153,7 +153,6 @@ bool Bestiole::jeTeVois( const Bestiole & b ) const
 
    double         dist;
 
-
    dist = std::sqrt( (x-b.x)*(x-b.x) + (y-b.y)*(y-b.y) );
    return ( dist <= LIMITE_VUE );
 
@@ -208,7 +207,10 @@ double Bestiole::getVitesse()
 {
    return (this->vitesse);
 }
-
+int Bestiole::getIdentite()
+{
+   return (this->identite);
+}
 void Bestiole::setVitesse(double v)
 {
    this->vitesse = v;
