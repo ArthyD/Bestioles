@@ -7,7 +7,6 @@
 
 // int               Bestiole::next = 0;
 
-
 BestiolePeureuse::BestiolePeureuse(void)
 {
 
@@ -42,13 +41,44 @@ BestiolePeureuse::BestiolePeureuse(void)
    fuite = false;
    compteur = 1000;
 }
-BestiolePeureuse::BestiolePeureuse(bool persoMult, int age, double champOeil, double distanceOeil, double distanceOreille, double capaciteOeil, double capaciteOreille, double coeffCamouflage, double coeffCarapace, double coeffNageoire, int agoraphobe){
+BestiolePeureuse::BestiolePeureuse(bool pM, double t, int a, double champo, double disto, double distOr, double capaOeil, double capaOreille, double coeffCamou, double coeffCarap, double coeffNag, int ago){
+   
+   identite = ++next;
+   cout << "Naissance Bestiole (" << identite << ") peureuse" << endl;
+
+   x = y = 0;
+   cumulX = cumulY = 0.;
+   orientation = static_cast<double>( rand() )/RAND_MAX*2.*M_PI;
+   vitesse = static_cast<double>( rand() )/RAND_MAX*MAX_VITESSE;
+
+   couleur = new T[ 3 ];
+   couleur[ 0 ] = static_cast<int>( static_cast<double>( rand() )/RAND_MAX*230. );
+   couleur[ 1 ] = static_cast<int>( static_cast<double>( rand() )/RAND_MAX*230. );
+   couleur[ 2 ] = static_cast<int>( static_cast<double>( rand() )/RAND_MAX*230. );
+
+   persoMult = pM;
+   taille = t;
+
+   champOeil = champo;
+   champOreille = 2*M_PI;
+   distanceOeil = disto;
+   distanceOreille = distOr;
+   capaciteOeil = capaOeil;
+   capaciteOreille = capaOreille;
+   coeffCamouflage = coeffCamou;
+   coeffCarapace = coeffCarap;
+   coeffNageoire = coeffNag;
+
+   agoraphobe = ago;
+   fuite = false; //PARAM
+   compteur = 1000; //PARAM
+    
     std::cout << "Create bestiole peureuse" << std::endl;
 }  
 
 BestiolePeureuse::~BestiolePeureuse(){};
 
-void BestiolePeureuse::update(std::vector<Bestiole>& vectorBestioleProche){
+void BestiolePeureuse::update(std::vector<Bestiole*>& vectorBestioleProche){
     if (fuite){
         if (compteur == 0) {
             fuite = false;

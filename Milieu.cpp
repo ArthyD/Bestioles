@@ -43,17 +43,17 @@ void Milieu::naissanceAlea( void ){
 }
 
 void Milieu::phaseDetection ( void ){
-   std::vector<Bestiole> bestiolesAlentours;
-   for ( std::list<BestiolePeureuse>::iterator it1 = listeBestioles.begin() ; it1 != listeBestioles.end() ; it1++ )
+   std::vector<Bestiole*> bestiolesAlentours;
+   for ( std::list<Bestiole*>::iterator it1 = listeBestioles.begin() ; it1 != listeBestioles.end() ; it1++ )
    {
-      for ( std::list<BestiolePeureuse>::iterator it2 = listeBestioles.begin() ; it2 != listeBestioles.end() ; it2++ )
+      for ( std::list<Bestiole*>::iterator it2 = listeBestioles.begin() ; it2 != listeBestioles.end() ; it2++ )
       {
-         if (it1->getIdentite() != it2->getIdentite()) {
-            if ( it1->jeTeVois(*it2) ) 
+         if ((*it1)->getIdentite() != (*it2)->getIdentite()) {
+            if ( (*it1)->jeTeVois(**it2) ) 
             {
                bestiolesAlentours.push_back(*it2);
             }
-            it1->update(bestiolesAlentours);
+            (*it1)->update(bestiolesAlentours);
          }
       }
       bestiolesAlentours.clear();
@@ -64,11 +64,11 @@ void Milieu::phaseAction( void )
 {
 
    cimg_forXY( *this, x, y ) fillC( x, y, 0, white[0], white[1], white[2] );
-   for ( std::list<BestiolePeureuse>::iterator it = listeBestioles.begin() ; it != listeBestioles.end() ; ++it )
+   for ( std::list<Bestiole*>::iterator it = listeBestioles.begin() ; it != listeBestioles.end() ; ++it )
    {
 
-      it->action( *this );
-      it->draw( *this );
+      (*it)->action( *this );
+      (*it)->draw( *this );
 
    } 
 
@@ -81,8 +81,8 @@ int Milieu::nbVoisins( const Bestiole & b )
    int         nb = 0;
 
 
-   for ( std::list<BestiolePeureuse>::iterator it = listeBestioles.begin() ; it != listeBestioles.end() ; ++it )
-      if ( !(b == *it) && b.jeTeVois(*it) )
+   for ( std::list<Bestiole*>::iterator it = listeBestioles.begin() ; it != listeBestioles.end() ; ++it )
+      if ( !(b == **it) && b.jeTeVois(**it) )
          ++nb;
 
    return nb;

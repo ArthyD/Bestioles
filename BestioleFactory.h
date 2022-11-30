@@ -18,7 +18,7 @@ class BestioleFactory {
         double capaciteOreilleMax;
         double capaciteOreilleMin;
         //nageoires
-        double coeffNageoire;
+        double coeffNageoire = 1;
         //carapace
         double coeffCarapaceMax;
         double coeffDebuffCarapaceMax;;
@@ -27,11 +27,11 @@ class BestioleFactory {
         double coeffCamouflageMin;
 
         //bestiolepeureuse
-        int agoraMin;
-        int agoraMax;
+        int agoraMin = 1;
+        int agoraMax = 1;
 
         // autre :
-        double taillemax;
+        double taillemax = 5;
         int agemax;
         
     public :

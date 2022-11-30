@@ -21,7 +21,7 @@ private :
    static const T          white[];
 
    int                     width, height;
-   std::list<BestiolePeureuse>   listeBestioles;
+   std::list<Bestiole*>   listeBestioles;
 
    float                   PourcentageKamikaze = 0.15;
    float                   PourcentagePeureuse = 0.25;
@@ -42,7 +42,7 @@ public :
    void phaseDetection( void );
    void naissanceAlea( void );  
 
-   void addMember( const BestiolePeureuse & b ) { listeBestioles.push_back(b); listeBestioles.back().initCoords(width, height); }
+   void addMember(Bestiole* b ) { listeBestioles.push_back(b); listeBestioles.back()->initCoords(width, height); }
    int nbVoisins( const Bestiole & b );
 
 };

@@ -66,7 +66,7 @@ public :                                           // Forme canonique :
 
    friend bool operator==( const Bestiole & b1, const Bestiole & b2 );
 
-   virtual void update(std::vector<Bestiole>& vectorBestioleProche) {std::cout<< "Mauvais update" << std::endl;};
+   virtual void update(std::vector<Bestiole*>& vectorBestioleProche) {std::cout<< "Mauvais update" << std::endl;};
    void rebondit( Bestiole * b );
    Bestiole clone();
    Bestiole clone(Bestiole b);
