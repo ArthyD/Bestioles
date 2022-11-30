@@ -1,11 +1,12 @@
-#ifndef _bestiolefactory_
-#define _bestiolefactory_
-#include "bestiole.h"
+#ifndef _BESTIOLEFACTORY_
+#define _BESTIOLEFACTORY_
+#include "Bestiole.h"
+#include "BestiolePeureuse.h"
 
-class bestioleFactory {
+class BestioleFactory {
     private :
         //yeux
-        double champoOeilMax;
+        double champOeilMax;
         double champOeilMin;
         double distanceOeilMax;
         double distanceOeilMin;
@@ -26,17 +27,18 @@ class bestioleFactory {
         double coeffCamouflageMin;
 
         //bestiolepeureuse
-        double agoraMin;
-        double agoraMax;
+        int agoraMin;
+        int agoraMax;
 
         // autre :
         double taillemax;
-        double agemax;
+        int agemax;
         
     public :
-    bestiole* creationBestiole(int type, bool aOreille, bool aYeux, bool aCamouflage, bool aCarapace, bool aNageoires);
-    bestioleFactory();
-    ~bestioleFactory();
+        Bestiole* creationBestiole(bool persoMult, int type, bool aOreille, bool aYeux, bool aCamouflage, bool aCarapace, bool aNageoires);
+        BestioleFactory();
+        ~BestioleFactory();
+        double randomDouble(double min, double max);
 };
 
 #endif
