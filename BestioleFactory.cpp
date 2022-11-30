@@ -14,6 +14,13 @@ double coeffCarapace = 0;
 double coeffDebuffCarapace = 0;
 double coeffNageoire = 1;
 
+BestioleFactory::BestioleFactory()
+{}
+
+BestioleFactory::~BestioleFactory()
+{}
+
+
 double BestioleFactory::randomDouble(double min, double max) {
     std::srand(std::time(nullptr));
     return (((double)rand()*(max) / RAND_MAX) - max) *(-1);
