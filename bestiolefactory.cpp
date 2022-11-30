@@ -1,8 +1,5 @@
 #include "BestioleFactory.h"
-#include "BestiolePeureuse.h"
-#include "BestiolePrevoyante.h"
-#include "BestioleGregaire.h"
-//#include "BestioleKamikaze.h"
+
 #include <stdlib.h>
 #include <time.h>
 

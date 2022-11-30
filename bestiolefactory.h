@@ -1,7 +1,10 @@
 #ifndef _bestiolefactory_
 #define _bestiolefactory_
 #include "Bestiole.h"
-
+#include "BestiolePeureuse.h"
+#include "BestiolePrevoyante.h"
+#include "BestioleGregaire.h"
+//#include "BestioleKamikaze.h"
 class BestioleFactory {
     private :
         //yeux
