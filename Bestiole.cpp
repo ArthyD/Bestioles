@@ -69,7 +69,7 @@ Bestiole::~Bestiole( void )
 
    delete[] couleur;
 
-   //cout << "dest Bestiole" << endl;
+   cout << "dest Bestiole" << endl;
 
 }
 
@@ -91,6 +91,7 @@ Bestiole::Bestiole(bool pM, double t, int a, double champo, double disto, double
    persoMult = pM;
    taille = t;
    anneesRestantes = a;
+   std::cout << "age " << a << "et années restantes " << anneesRestantes << std::endl;
 
    champOeil = champo;
    champOreille = 2*M_PI;
@@ -295,7 +296,7 @@ bool Bestiole::isPersoMult(){
 
 void Bestiole::vieillit()
 {
-   anneesRestantes-=1;
+   anneesRestantes = anneesRestantes - 1;
 }
 
 int Bestiole::getX()
