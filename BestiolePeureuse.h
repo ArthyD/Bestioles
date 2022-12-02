@@ -13,6 +13,7 @@ class BestiolePeureuse : public Bestiole {
         void update(std::vector<Bestiole*>& vectorBestioleProche);
         BestiolePeureuse(bool persoMult, double t, int age, double champOeil, double distanceOeil, double distanceOreille, double capaciteOeil, double capaciteOreille, double coeffCamouflage, double coeffCarapace, double coeffNageoire, int agoraphobe);
         BestiolePeureuse(void );
+        BestiolePeureuse(bool persoMult, int age, double champOeil, double distanceOeil, double distanceOreille, double capaciteOeil, double capaciteOreille, double coeffCamouflage, double coeffCarapace, double coeffNageoire, int agoraphobe);
         ~BestiolePeureuse( void );
 };
 

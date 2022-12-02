@@ -72,6 +72,9 @@ Bestiole::~Bestiole( void )
 
 }
 
+Bestiole::Bestiole(bool persoMult, int age, double champOeil, double distanceOeil, double distanceOreille, double capaciteOeil, double capaciteOreille, double coeffCamouflage, double coeffCarapace, double coeffNageoire){
+
+}
 
 void Bestiole::initCoords( int xLim, int yLim )
 {

@@ -55,6 +55,7 @@ private :
 public :                                           // Forme canonique :
    Bestiole( void );                               // Constructeur par defaut
    Bestiole( const Bestiole & b );                 // Constructeur de copies
+   Bestiole(bool persoMult, int age, double champOeil, double distanceOeil, double distanceOreille, double capaciteOeil, double capaciteOreille, double coeffCamouflage, double coeffCarapace, double coeffNageoire);
    ~Bestiole( void );                              // Destructeur
                                                    // Operateur d'affectation binaire par defaut
    void action( Milieu & monMilieu );
