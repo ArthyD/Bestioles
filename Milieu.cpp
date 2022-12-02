@@ -95,6 +95,7 @@ int Milieu::randomPerso(){
    int type = 1;
    if (tirageAlea < pourcentageGregaire){
       type = 2;
+   }
    else if (tirageAlea < pourcentageGregaire + pourcentagePeureuse)
    {
       type = 4;
@@ -103,7 +104,8 @@ int Milieu::randomPerso(){
    {
       type = 1;
    }
-   else type = 3;
+   else {
+      type = 3;
    }
    return type;
 }
