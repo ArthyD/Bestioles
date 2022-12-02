@@ -43,7 +43,8 @@ public :
    void phaseAction( void );
    void phaseEnvironnement( void );
    void phaseDetection( void );
-   void naissanceAlea( void );  
+   void naissanceAlea( void );
+   void addPersoAlea( void ); 
    int randomPerso(void);
 
    void readConfig( void );

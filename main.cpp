@@ -15,30 +15,11 @@ int main()
 
    BestioleFactory factory;
 
-   Bestiole* besti[20];
-   Bestiole* besti1[20];
-   Bestiole* besti2[20];
-   Bestiole* besti3[20];
+   Milieu mili = ecosysteme.getMilieu();
+   for (int i = 0; i<=40; i++){
+      mili.addPersoAlea();
+   }
 
-   for (int i = 0; i<=20; i++){
-      besti[i] = factory.creationBestiole(false, 1, true, true, false, false,false);
-   }
-   for (int i = 0; i<=20; i++){
-      besti1[i] = factory.creationBestiole(false, 2, true, true, false, false,false);
-   }
-   for (int i = 0; i<=20; i++){
-      besti2[i] = factory.creationBestiole(false, 3, true, true, false, false,false);
-   }
-   for (int i = 0; i<=20; i++){
-      besti3[i] = factory.creationBestiole(false, 4, true, true, false, false,false);
-   }
-   for ( int i = 0; i <= 20; ++i ){
-      ecosysteme.getMilieu().addMember(besti[i]);
-
-      ecosysteme.getMilieu().addMember(besti1[i]);
-      ecosysteme.getMilieu().addMember(besti2[i]);
-      ecosysteme.getMilieu().addMember(besti3[i]);
-   }
    ecosysteme.run();
 
    return 0;
