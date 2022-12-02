@@ -90,6 +90,7 @@ Bestiole::Bestiole(bool pM, double t, int a, double champo, double disto, double
 
    persoMult = pM;
    taille = t;
+   anneesRestantes = a;
 
    champOeil = champo;
    champOreille = 2*M_PI;
@@ -189,7 +190,7 @@ bool Bestiole::jeTeVois( const Bestiole & b ) const
 
 }
 
-void Bestiole::rebondit(Bestiole * pBestiole)
+void Bestiole::rebondit()
 {
    vitesse*=-1;
 }
@@ -224,7 +225,7 @@ bool Bestiole::collision(){
 }
 
 
-Bestiole Bestiole::clone()
+Bestiole* Bestiole::clone()
 {
    Bestiole* clone = new Bestiole();
    clone->next=next;
@@ -320,21 +321,14 @@ int Bestiole::getIdentite()
 {
    return identite;
 }
+
 int Bestiole::getAnneesRestantes()
 {
-   return (this->anneesRestantes);
+   return anneesRestantes;
 }
 int Bestiole::getTaille()
 {
-   return (taille);
-}
-int Bestiole::getAnneesRestantes()
-{
-   return (this->anneesRestantes);
-}
-int Bestiole::getTaille()
-{
-   return (this->taille);
+   return taille;
 }
 void Bestiole::setVitesse(double v)
 {

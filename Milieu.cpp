@@ -67,7 +67,7 @@ void Milieu::step( void ){
    
    phaseDetection();
    phaseAction();
-   //PhaseEnvironnement();
+   phaseEnvironnement();
    //naissanceAlea();
 
 }
@@ -78,8 +78,11 @@ void Milieu::phaseEnvironnement( void ){
    for ( std::list<Bestiole*>::iterator it1 = listeBestioles.begin() ; 
          it1 != listeBestioles.end() ; it1++ ){
       (**it1).vieillit();
+      std::cout << *it1 << std::endl;
+      std::cout << "années" << (**it1).getAnneesRestantes() << std::endl;
       if ((**it1).getAnneesRestantes()==0){
          listeBestioles.remove(*it1);
+         delete(*it1);
       }
    }
 
@@ -89,7 +92,7 @@ void Milieu::phaseEnvironnement( void ){
          it1 != listeBestioles.end() ; it1++ ){
       for ( std::list<Bestiole*>::iterator it2 = listeBestioles.begin() ; 
             it2 != it1 ; it2++ ){
-         if (checkCollision((*it1),(*it2))){
+         if ((*it2)->checkCollision((*it1))){
             collisions.push_back(*it1);
             collisions.push_back(*it2);
          }
@@ -98,11 +101,11 @@ void Milieu::phaseEnvironnement( void ){
 
    for ( std::vector<Bestiole*>::iterator it1 = collisions.begin() ; 
          it1 != collisions.end() ; it1++ ){
-            if(**it1.collision()){
+            if((**it1).collision()){
                listeBestioles.remove(*it1);
             }
             else{
-               **it1.rebondit();
+               (**it1).rebondit();
             }
 
          }

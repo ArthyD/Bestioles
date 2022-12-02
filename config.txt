@@ -21,4 +21,4 @@ Coefficient Camouflage Mininmal=0.0
 Agoraphobie Minimale=1.0
 Agoraphobie Maximale=10.0
 Taille Maximale=5.0
-Age Maximal=100000.0
+Age Maximal=1000.0

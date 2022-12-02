@@ -69,7 +69,7 @@ public :                                           // Forme canonique :
    friend bool operator==( const Bestiole & b1, const Bestiole & b2 );
 
    virtual void update(std::vector<Bestiole*>& vectorBestioleProche) {std::cout<< "Mauvais update" << std::endl;};
-   void rebondit( Bestiole * b );
+   void rebondit();
    bool checkCollision(Bestiole* b);
    bool collision();
    virtual Bestiole* clone();
