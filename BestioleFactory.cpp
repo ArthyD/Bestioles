@@ -5,6 +5,7 @@
 #include <time.h>
 #include <fstream>
 #include <string>
+#include <cmath>
 
 
 double distanceOreille = 0;
@@ -13,8 +14,8 @@ double champOeil = 0;
 double distanceOeil = 0;
 double capaciteOeil = 0;
 double coeffCamouflage = 0;
-double coeffCarapace = 1;
-double coeffDebuffCarapace = 1;
+double coeffCarapace = 1; // ???
+double coeffDebuffCarapace = 1;///
 double coeffNageoire = 1;
 
 BestioleFactory::BestioleFactory()
@@ -76,7 +77,7 @@ void BestioleFactory::readConfig(void)
              capaciteOreilleMin = valeur;
             }
             if (champ == "Coefficient Nageoire") {
-             coeffNageoire = valeur;
+                coeffNageoire = valeur;
             }
             if (champ == "Coefficient Carapace Maximal") {
                 coeffCarapaceMax = valeur;

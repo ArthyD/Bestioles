@@ -180,15 +180,51 @@ bool operator==( const Bestiole & b1, const Bestiole & b2 )
 }
 
 
-bool Bestiole::jeTeVois( const Bestiole & b ) const
-
-{
-
-   double         dist;
-
+bool Bestiole::jeTeVois( const Bestiole & b ) const{
+   double dist;
+   double angleEntreBestioles;
+   double alpha;
    dist = std::sqrt( (x-b.x)*(x-b.x) + (y-b.y)*(y-b.y) );
-   return ( dist <= LIMITE_VUE );
 
+   if (capaciteOeil<=b.coeffCamouflage){
+      if (capaciteOreille<=b.coeffCamouflage){
+         return (false);
+      } else {
+         if (distanceOreille<dist){
+            return(false);
+         }else{
+            return (true);
+         }
+      }
+   }
+   if (capaciteOreille<=b.coeffCamouflage){
+      if (capaciteOeil<=b.coeffCamouflage){
+         return (false);
+      } else if (distanceOeil<dist){
+         return (false);
+      } else {
+         if ((b.x-x)>=0){
+            if ((b.y-y)>=0){
+               alpha = atan((b.y-y)/(b.x-x));
+            } else {
+            alpha = atan((b.y-y)/(b.x-x)) + 2*M_PI;
+            }
+         } else {
+            if ((b.y-y)>=0){
+               alpha = M_PI_2 + atan((b.y-y)/(b.x-x));
+            } else {
+            alpha = M_PI + atan((b.y-y)/(b.x-x));
+            }
+         }
+         angleEntreBestioles = abs(orientation - alpha);
+         if (angleEntreBestioles<(champOeil/2)){
+            return true;
+            cout << "je vois"<<endl;
+         } else {
+            return false;
+         }
+      }
+   }
 }
 
 void Bestiole::rebondit()
