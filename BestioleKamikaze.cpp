@@ -11,7 +11,7 @@ double distanceCarre = 0;
 
 BestioleKamikaze::BestioleKamikaze(void){}
 
-BestioleKamikaze::BestioleKamikaze(bool pM, double t, int a, double champo, double disto, double distOr, double capaOeil, double capaOreille, double coeffCamou, double coeffCarap, double coeffNag){} 
+BestioleKamikaze::BestioleKamikaze(bool pM, double t, int a, double champo, double disto, double distOr, double capaOeil, double capaOreille, double coeffCamou, double coeffCarap, double coeffDebuffCarap, double coeffNag){} 
 
 BestioleKamikaze::~BestioleKamikaze(){};
 // Fonction update 

@@ -5,7 +5,7 @@
 
 class BestioleKamikaze : public Bestiole {        
 public :
-  BestioleKamikaze(bool pM, double t, int a, double champo, double disto, double distOr, double capaOeil, double capaOreille, double coeffCamou, double coeffCarap, double coeffNag);      
+  BestioleKamikaze(bool pM, double t, int a, double champo, double disto, double distOr, double capaOeil, double capaOreille, double coeffCamou, double coeffCarap, double coeffDebuffCarap, double coeffNag);      
   void update(vector<Bestiole*>& vectorBestioleProche);   
   BestioleKamikaze(void );
   ~BestioleKamikaze( void );           
