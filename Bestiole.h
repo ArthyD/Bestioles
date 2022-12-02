@@ -45,6 +45,7 @@ protected :
    double capaciteOreille;
    double coeffCamouflage;
    double coeffCarapace;
+   double coeffDebuffCarapace;
    double coeffNageoire;
 
 
@@ -55,7 +56,7 @@ private :
 public :                                           // Forme canonique :
    Bestiole( void );                               // Constructeur par defaut
    Bestiole( const Bestiole & b );                 // Constructeur de copies
-   Bestiole(bool persoMult, int age, double champOeil, double distanceOeil, double distanceOreille, double capaciteOeil, double capaciteOreille, double coeffCamouflage, double coeffCarapace, double coeffNageoire);
+   Bestiole(bool pM, double t, int a, double champo, double disto, double distOr, double capaOeil, double capaOreille, double coeffCamou, double coeffCarap, double coeffDebuffCarap, double coeffNag);
    ~Bestiole( void );                              // Destructeur
                                                    // Operateur d'affectation binaire par defaut
    void action( Milieu & monMilieu );
@@ -71,10 +72,11 @@ public :                                           // Forme canonique :
    void rebondit( Bestiole * b );
    bool checkCollision(Bestiole* b);
    bool collision();
-   Bestiole clone();
-   Bestiole clone(Bestiole b);
+   virtual Bestiole* clone();
+   virtual void clone(Bestiole* b);
    bool hasOeil();
    bool hasOreille();
+   bool isPersoMult();
    void vieillit();
    int getX();
    int getY();

@@ -48,6 +48,8 @@ public :
    void naissanceAlea( void );  
    int randomPerso(void);
 
+   void readConfig( void );
+
    void addMember(Bestiole* b ) { listeBestioles.push_back(b); listeBestioles.back()->initCoords(width, height); }
    int nbVoisins( const Bestiole & b );
 

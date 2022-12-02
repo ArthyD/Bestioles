@@ -21,13 +21,16 @@ class BestioleFactory {
         double capaciteOreilleMax;
         double capaciteOreilleMin;
         //nageoires
-        double coeffNageoire = 1;
+        double coeffNageoireMin;
+        double coeffNageoireMax;
         //carapace
+        double coeffCarapaceMin;
         double coeffCarapaceMax;
-        double coeffDebuffCarapaceMax;;
+        double coeffDebuffCarapaceMin;
+        double coeffDebuffCarapaceMax;
         //camouflage;
-        double coeffCamouflageMax;
         double coeffCamouflageMin;
+        double coeffCamouflageMax;
 
         //bestiolepeureuse
         int agoraMin = 1;
@@ -41,6 +44,7 @@ class BestioleFactory {
         Bestiole* creationBestiole(bool persoMult, int type, bool aOreille, bool aYeux, bool aCamouflage, bool aCarapace, bool aNageoires);
         BestioleFactory();
         ~BestioleFactory();
+        void readConfig(void);
         double randomDouble(double min, double max);
 };
 

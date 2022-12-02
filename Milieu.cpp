@@ -4,6 +4,8 @@
 #include <ctime>
 #include <random>
 #include <iostream>
+#include <fstream>
+#include <string>
 
 const T    Milieu::white[] = { (T)255, (T)255, (T)255 };
 
@@ -11,7 +13,7 @@ const T    Milieu::white[] = { (T)255, (T)255, (T)255 };
 Milieu::Milieu( int _width, int _height ) : UImg( _width, _height, 1, 3 ),
                                             width(_width), height(_height)
 {
-
+   readConfig();
    cout << "const Milieu" << endl;
 
    std::srand( time(NULL) );
@@ -21,9 +23,44 @@ Milieu::Milieu( int _width, int _height ) : UImg( _width, _height, 1, 3 ),
 
 Milieu::~Milieu( void )
 {
-
    cout << "dest Milieu" << endl;
+}
 
+void Milieu::readConfig(void)
+{
+   ifstream fichier("./config.txt", ios::in);
+   if (fichier)
+   {
+            std::string ligne;
+            std::string champ;
+            double valeur;
+            for (int i =0;  i < 5; i++)
+        {
+            getline(fichier, ligne);
+            std::size_t pos = ligne.find("=");
+            champ = ligne.substr(0,pos);
+            valeur = stod(ligne.substr(pos+1));
+            if (champ == "Pourcentage Kamikaze") {
+             pourcentageKamikaze = valeur;
+            }
+            if (champ == "Pourcentage Grégaire") {
+             pourcentageGregaire = valeur;
+            }
+            if (champ == "Pourcentage Peureuse") {
+             pourcentagePeureuse = valeur;
+            }            
+            if (champ == "Pourcentage Personnalité Multiple") {
+             pourcentagePersoMulti = valeur;
+            }
+            if (champ == "Pourcentage Prevoyante") {
+             pourcentagePrevoyante = valeur;
+            }
+        }
+   }
+   else {
+      cerr << "Impossible d'ouvrir le fichier de configuration !" << endl;
+   }
+   fichier.close();
 }
 
 void Milieu::step( void ){
@@ -31,7 +68,7 @@ void Milieu::step( void ){
    phaseDetection();
    phaseAction();
    //PhaseEnvironnement();
-   naissanceAlea();
+   //naissanceAlea();
 
 }
 
@@ -70,25 +107,39 @@ void Milieu::phaseEnvironnement( void ){
 
          }
 
-   // Gestion des personnalités multiples
+   // Changement de personalité des personalités multiples
+   for ( std::list<Bestiole*>::iterator it1 = listeBestioles.begin() ; it1 != listeBestioles.end() ; it1++ ){
+      if((*it1)->isPersoMult()){
+         if(std::rand()%6000==0){
+            int type = randomPerso();
+            BestioleFactory factory;
+            Bestiole* best = factory.creationBestiole(true, type, false, false, false, false, false);
+            best->clone(*it1);
+            listeBestioles.remove(*it1);
+            delete(*it1);
+            listeBestioles.push_back(best);
+         }
+      }
+   }
 }
 
 
 int Milieu::randomPerso(){
-   double tirageAlea = static_cast<double>( );
+   double tirageAlea = static_cast<double>( std::rand()/RAND_MAX);
+   int type = 1;
    if (tirageAlea < pourcentageGregaire){
-      return 2;
-   if (tirageAlea < pourcentageGregaire + pourcentagePeureuse)
+      type = 2;
+   else if (tirageAlea < pourcentageGregaire + pourcentagePeureuse)
    {
-      return 4;
+      type = 4;
    }
-      if (tirageAlea < pourcentageGregaire + pourcentagePeureuse + pourcentageKamikaze)
+   else if (tirageAlea < pourcentageGregaire + pourcentagePeureuse + pourcentageKamikaze)
    {
-      return 1;
+      type = 1;
    }
-   return 3;
+   else type = 3;
    }
-
+   return type;
 }
 
 void Milieu::naissanceAlea( void ){
@@ -97,15 +148,15 @@ void Milieu::naissanceAlea( void ){
    BestioleFactory factory;
    if (tirageAlea < probaNaissance)
    {
-      bool persoMult,type,aOreille,aYeux,aCamouflage,aCarapace,aNageoires;
+      bool persoMult,aOreille,aYeux,aCamouflage,aCarapace,aNageoires;
       persoMult = std::rand()%2;
-      type = std::rand()%2;
       aYeux = std::rand()%2;
+      aOreille = std::rand()%2;
       aCamouflage = std::rand()%2;
       aCarapace = std::rand()%2;
       aNageoires = std::rand()%2;
       int persoAlea = randomPerso();
-      Bestiole* best = factory.creationBestiole(persoMult, persoAlea, aOreille, aYeux, aCamouflage, aCamouflage, aNageoires);
+      Bestiole* best = factory.creationBestiole(persoMult, persoAlea, aOreille, aYeux, aCamouflage, aCarapace, aNageoires);
       addMember(best);
    }
 }
