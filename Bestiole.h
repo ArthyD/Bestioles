@@ -73,6 +73,7 @@ public :                                           // Forme canonique :
    virtual void clone(Bestiole* b);
    bool hasOeil();
    bool hasOreille();
+   bool isPersoMult();
    void vieillit();
    int getX();
    int getY();

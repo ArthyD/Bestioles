@@ -23,14 +23,11 @@ Milieu::Milieu( int _width, int _height ) : UImg( _width, _height, 1, 3 ),
 
 Milieu::~Milieu( void )
 {
-
    cout << "dest Milieu" << endl;
-
 }
 
 void Milieu::readConfig(void)
 {
-
    ifstream fichier("./config.txt", ios::in);
    if (fichier)
    {
@@ -77,6 +74,20 @@ void Milieu::step( void ){
 
 void Milieu::phaseEnvironnement( void ){
 
+   // Changement de personalité des personalités multiples
+   for ( std::list<Bestiole*>::iterator it1 = listeBestioles.begin() ; it1 != listeBestioles.end() ; it1++ ){
+      if((*it1)->isPersoMult()){
+         if(std::rand()%6000==0){
+            int type = randomPerso();
+            BestioleFactory factory;
+            Bestiole* best = factory.creationBestiole(true, type, false, false, false, false, false);
+            best->clone(*it1);
+            listeBestioles.remove(*it1);
+            delete(*it1);
+            listeBestioles.push_back(best);
+         }
+      }
+   }
 }
 
 int Milieu::randomPerso(){

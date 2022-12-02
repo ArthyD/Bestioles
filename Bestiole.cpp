@@ -253,6 +253,10 @@ bool Bestiole::hasOeil()
    return (this->capaciteOeil!=0);
 }
 
+bool Bestiole::isPersoMult(){
+   return persoMult;
+}
+
 void Bestiole::vieillit()
 {
    this->anneesRestantes-=1;
