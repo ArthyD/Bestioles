@@ -1,0 +1,5 @@
+Pourcentage Kamikaze=1.0
+Pourcentage Peureuse=1.0
+Pourcentage Grégaire=0.45
+Pourcentage Prevoyante=0.15
+Pourcentage Pourcentage Personnalité Multiple=0.0

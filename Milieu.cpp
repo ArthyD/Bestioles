@@ -4,6 +4,8 @@
 #include <ctime>
 #include <random>
 #include <iostream>
+#include <fstream>
+#include <string>
 
 const T    Milieu::white[] = { (T)255, (T)255, (T)255 };
 
@@ -11,7 +13,7 @@ const T    Milieu::white[] = { (T)255, (T)255, (T)255 };
 Milieu::Milieu( int _width, int _height ) : UImg( _width, _height, 1, 3 ),
                                             width(_width), height(_height)
 {
-
+   readConfig();
    cout << "const Milieu" << endl;
 
    std::srand( time(NULL) );
@@ -26,12 +28,50 @@ Milieu::~Milieu( void )
 
 }
 
+void Milieu::readConfig(void)
+{
+
+   ifstream fichier("./config.txt", ios::in);
+   if (fichier)
+   {
+            std::string ligne;
+            std::string champ;
+            double valeur;
+            for (int i =0;  i < 5; i++)
+        {
+            getline(fichier, ligne);
+            std::size_t pos = ligne.find("=");
+            champ = ligne.substr(0,pos);
+            valeur = stod(ligne.substr(pos+1));
+            if (champ == "Pourcentage Kamikaze") {
+             pourcentageKamikaze = valeur;
+            }
+            if (champ == "Pourcentage Grégaire") {
+             pourcentageGregaire = valeur;
+            }
+            if (champ == "Pourcentage Peureuse") {
+             pourcentagePeureuse = valeur;
+            }            
+            if (champ == "Pourcentage Personnalité Multiple") {
+             pourcentagePersoMulti = valeur;
+            }
+            if (champ == "Pourcentage Prevoyante") {
+             pourcentagePrevoyante = valeur;
+            }
+        }
+   }
+   else {
+      cerr << "Impossible d'ouvrir le fichier de configuration !" << endl;
+   }
+   fichier.close();
+}
+
 void Milieu::step( void ){
    
    phaseDetection();
    phaseAction();
    //PhaseEnvironnement();
-   naissanceAlea();
+   //naissanceAlea();
 
 }
 
@@ -51,7 +91,7 @@ int Milieu::randomPerso(){
    {
       return 1;
    }
-   return 3;
+   else return 3;
    }
 
 }
