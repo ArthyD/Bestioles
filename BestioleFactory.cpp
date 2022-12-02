@@ -67,7 +67,7 @@ Bestiole* BestioleFactory::creationBestiole(bool persoMult, int type, bool aOrei
     //     return new BestiolePrevoyante(persoMult, age, champOeil, distanceOeil, distanceOreille, capaciteOeil, capaciteOreille, coeffCamouflage, coeffCarapace, coeffNageoire);
     // } 
     if (type ==4) {
-        int agoraphobie = rand() % (agoraMax - agoraMin +1);
+        int agoraphobie = agoraMin + rand() % (agoraMax - agoraMin +1);
         return new BestiolePeureuse(persoMult, taille, age, champOeil, distanceOeil, distanceOreille, capaciteOeil, capaciteOreille, coeffCamouflage, coeffCarapace, coeffNageoire, agoraphobie);
     } else {
         return NULL;

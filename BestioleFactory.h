@@ -28,7 +28,7 @@ class BestioleFactory {
 
         //bestiolepeureuse
         int agoraMin = 1;
-        int agoraMax = 1;
+        int agoraMax = 3;
 
         // autre :
         double taillemax = 5;

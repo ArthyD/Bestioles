@@ -14,22 +14,15 @@ int main()
    Aquarium       ecosysteme( 640, 480, 30 );
 
    BestioleFactory factory;
-   //Bestiole* best = (Bestiole*) malloc(sizeof(Bestiole)*20);
 
    Bestiole* besti[20];
-   Bestiole* besti2[20];
    for (int i = 0; i<=20; i++){
       besti[i] = factory.creationBestiole(false, 4, true, true, false, false,false);
    }
-   for (int i = 0; i<=20; i++){
-      besti2[i] = factory.creationBestiole(false, 4, true, true, false, false,false);
-   }
    for ( int i = 0; i <= 20; ++i ){
-     // (best+i) = factory.creationBestiole(false, 4, true, true, false, false,false);
       ecosysteme.getMilieu().addMember(besti[i]);
    }
    ecosysteme.run();
-   //free(best);
 
    return 0;
 
