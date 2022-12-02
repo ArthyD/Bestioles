@@ -3,6 +3,8 @@
 #include "Bestiole.h"
 #include "BestiolePeureuse.h"
 #include "BestioleGregaire.h"
+#include "BestioleKamikaze.h"
+#include "BestiolePrevoyante.h"
 
 class BestioleFactory {
     private :

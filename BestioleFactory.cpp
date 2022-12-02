@@ -55,15 +55,15 @@ Bestiole* BestioleFactory::creationBestiole(bool persoMult, int type, bool aOrei
     int age = rand() % (agemax + 1);
     double taille = randomDouble(1.0,taillemax);
     //création de la bestiole choisie via le type
-    // if (type==1){
-    //     return new BestioleKamikaze(persoMult, age, champOeil, distanceOeil, distanceOreille, capaciteOeil, capaciteOreille, coeffCamouflage, coeffCarapace, coeffNageoire);
-    // } 
+    if (type==1){
+        return new BestioleKamikaze(persoMult, taille, age, champOeil, distanceOeil, distanceOreille, capaciteOeil, capaciteOreille, coeffCamouflage, coeffCarapace, coeffNageoire);
+    } 
     if (type ==2){
         return new BestioleGregaire(persoMult, taille, age, champOeil, distanceOeil, distanceOreille, capaciteOeil, capaciteOreille, coeffCamouflage, coeffCarapace, coeffNageoire);
     } 
-    // else if (type ==3){
-    //     return new BestiolePrevoyante(persoMult, age, champOeil, distanceOeil, distanceOreille, capaciteOeil, capaciteOreille, coeffCamouflage, coeffCarapace, coeffNageoire);
-    // } 
+    else if (type ==3){
+        return new BestiolePrevoyante(persoMult, taille, age, champOeil, distanceOeil, distanceOreille, capaciteOeil, capaciteOreille, coeffCamouflage, coeffCarapace, coeffNageoire);
+    } 
     if (type ==4) {
         int agoraphobie = agoraMin + rand() % (agoraMax - agoraMin +1);
         return new BestiolePeureuse(persoMult, taille, age, champOeil, distanceOeil, distanceOreille, capaciteOeil, capaciteOreille, coeffCamouflage, coeffCarapace, coeffNageoire, agoraphobie);
