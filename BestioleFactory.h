@@ -21,8 +21,7 @@ class BestioleFactory {
         double capaciteOreilleMax;
         double capaciteOreilleMin;
         //nageoires
-        double coeffNageoireMin;
-        double coeffNageoireMax;
+        double coeffNageoire;
         //carapace
         double coeffCarapaceMin;
         double coeffCarapaceMax;
