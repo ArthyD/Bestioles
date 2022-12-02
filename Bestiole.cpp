@@ -41,6 +41,7 @@ Bestiole::Bestiole( void )
    capaciteOreille = 0;
    coeffCamouflage = 0;
    coeffCarapace = 1;
+   coeffDebuffCarapace = 1;
    coeffNageoire = 1;
 }
 
@@ -72,7 +73,7 @@ Bestiole::~Bestiole( void )
 
 }
 
-Bestiole::Bestiole(bool pM, double t, int a, double champo, double disto, double distOr, double capaOeil, double capaOreille, double coeffCamou, double coeffCarap, double coeffNag){
+Bestiole::Bestiole(bool pM, double t, int a, double champo, double disto, double distOr, double capaOeil, double capaOreille, double coeffCamou, double coeffCarap, double coeffDebuffCarap, double coeffNag){
    
    identite = ++next;
    cout << "Naissance Bestiole (" << identite << ") " << endl;
@@ -80,7 +81,7 @@ Bestiole::Bestiole(bool pM, double t, int a, double champo, double disto, double
    x = y = 0;
    cumulX = cumulY = 0.;
    orientation = static_cast<double>( rand() )/RAND_MAX*2.*M_PI;
-   vitesse = static_cast<double>( rand() )/RAND_MAX*MAX_VITESSE;
+   vitesse = static_cast<double>( rand() )/RAND_MAX*MAX_VITESSE * (coeffNageoire / coeffDebuffCarapace);
 
    couleur = new T[ 3 ];
    couleur[ 0 ] = static_cast<int>( static_cast<double>( rand() )/RAND_MAX*230. );
@@ -98,6 +99,7 @@ Bestiole::Bestiole(bool pM, double t, int a, double champo, double disto, double
    capaciteOreille = capaOreille;
    coeffCamouflage = coeffCamou;
    coeffCarapace = coeffCarap;
+   coeffDebuffCarapace = coeffDebuffCarap;
    coeffNageoire = coeffNag;
     
 } 
@@ -189,7 +191,7 @@ bool Bestiole::jeTeVois( const Bestiole & b ) const
 
 void Bestiole::rebondit(Bestiole * pBestiole)
 {
-   this->vitesse*=-1;
+   vitesse*=-1;
 }
 
 Bestiole* Bestiole::clone()
@@ -214,6 +216,7 @@ Bestiole* Bestiole::clone()
    clone->capaciteOreille=capaciteOreille;
    clone->coeffCamouflage=coeffCamouflage;
    clone->coeffCarapace=coeffCarapace;
+   clone->coeffDebuffCarapace=coeffDebuffCarapace;
    clone->coeffNageoire=coeffNageoire;
    return clone;
 } 
@@ -240,17 +243,19 @@ void Bestiole::clone(Bestiole* bestiolePrototype)
    capaciteOeil=bestiolePrototype->capaciteOeil;
    capaciteOreille=bestiolePrototype->capaciteOreille;
    coeffCamouflage=bestiolePrototype->coeffCamouflage;
+   coeffCarapace=bestiolePrototype->coeffCarapace;
+   coeffDebuffCarapace=bestiolePrototype->coeffDebuffCarapace;
    coeffNageoire=bestiolePrototype->coeffNageoire;
 } 
 
 bool Bestiole::hasOreille()
 {
-   return (this->capaciteOreille!=0);
+   return capaciteOreille!=0;
 }
 
 bool Bestiole::hasOeil()
 {
-   return (this->capaciteOeil!=0);
+   return capaciteOeil!=0;
 }
 
 bool Bestiole::isPersoMult(){
@@ -259,35 +264,35 @@ bool Bestiole::isPersoMult(){
 
 void Bestiole::vieillit()
 {
-   this->anneesRestantes-=1;
+   anneesRestantes-=1;
 }
 
 int Bestiole::getX()
 {
-   return (this->x);
+   return x;
 }
 
 int Bestiole::getY()
 {
-   return (this->y);
+   return y;
 }
 
 double Bestiole::getOrientation()
 {
-   return (this->orientation);
+   return orientation;
 }
 
 double Bestiole::getVitesse()
 {
-   return (this->vitesse);
+   return vitesse;
 }
 int Bestiole::getIdentite()
 {
-   return (this->identite);
+   return identite;
 }
 void Bestiole::setVitesse(double v)
 {
-   this->vitesse = v;
+   vitesse = v;
 }
 void Bestiole::setOrientation(double o)
 {

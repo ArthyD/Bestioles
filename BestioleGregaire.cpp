@@ -2,7 +2,7 @@
 
 BestioleGregaire::BestioleGregaire(void){}
 
-BestioleGregaire::BestioleGregaire(bool pM, double t, int a, double champo, double disto, double distOr, double capaOeil, double capaOreille, double coeffCamou, double coeffCarap, double coeffNag){} 
+BestioleGregaire::BestioleGregaire(bool pM, double t, int a, double champo, double disto, double distOr, double capaOeil, double capaOreille, double coeffCamou, double coeffCarap, double coeffDebuffCarap, double coeffNag){} 
 
 BestioleGregaire::~BestioleGregaire(){};
 

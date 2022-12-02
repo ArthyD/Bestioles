@@ -3,7 +3,7 @@
 
 BestiolePrevoyante::BestiolePrevoyante(void){}
 
-BestiolePrevoyante::BestiolePrevoyante(bool pM, double t, int a, double champo, double disto, double distOr, double capaOeil, double capaOreille, double coeffCamou, double coeffCarap, double coeffNag){} 
+BestiolePrevoyante::BestiolePrevoyante(bool pM, double t, int a, double champo, double disto, double distOr, double capaOeil, double capaOreille, double coeffCamou, double coeffCarap, double coeffDebuffCarap, double coeffNag){} 
 
 BestiolePrevoyante::~BestiolePrevoyante(){};
 

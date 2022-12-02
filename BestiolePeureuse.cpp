@@ -8,7 +8,7 @@ BestiolePeureuse::BestiolePeureuse(void)
    compteur = 1000;
 }
 
-BestiolePeureuse::BestiolePeureuse(bool pM, double t, int a, double champo, double disto, double distOr, double capaOeil, double capaOreille, double coeffCamou, double coeffCarap, double coeffNag){
+BestiolePeureuse::BestiolePeureuse(bool pM, double t, int a, double champo, double disto, double distOr, double capaOeil, double capaOreille, double coeffCamou, double coeffCarap, double coeffDebuffCarap, double coeffNag){
    agoraphobe = 2;
    fuite = false;
    compteur = 1000;
