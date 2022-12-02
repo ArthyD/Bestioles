@@ -43,7 +43,7 @@ void BestioleKamikaze::update(vector<Bestiole*> & vectorBestioleProche){
         if (deltaX < 0) {
             orientation = M_PI + atan(deltaY / deltaX);
         }
-        else if (delta y >= 0) {
+        else if (deltaY >= 0) {
             orientation = atan(deltaY / deltaX);
         } else {
             orientation = atan(deltaY / deltaX) + 2*M_PI;
