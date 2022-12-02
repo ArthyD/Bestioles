@@ -22,8 +22,6 @@ BestioleFactory::~BestioleFactory()
 
 
 double BestioleFactory::randomDouble(double min, double max) {
-    //std::srand(std::time(nullptr));
-    //return (((double)rand()*(max) / RAND_MAX) - max) *(-1);
     return static_cast<double>( rand() )/RAND_MAX*max;
 }
 
@@ -60,9 +58,9 @@ Bestiole* BestioleFactory::creationBestiole(bool persoMult, int type, bool aOrei
     // if (type==1){
     //     return new BestioleKamikaze(persoMult, age, champOeil, distanceOeil, distanceOreille, capaciteOeil, capaciteOreille, coeffCamouflage, coeffCarapace, coeffNageoire);
     // } 
-    // if (type ==2){
-    //     return new BestioleGregaire(persoMult, age, champOeil, distanceOeil, distanceOreille, capaciteOeil, capaciteOreille, coeffCamouflage, coeffCarapace, coeffNageoire);
-    // } 
+    if (type ==2){
+        return new BestioleGregaire(persoMult, taille, age, champOeil, distanceOeil, distanceOreille, capaciteOeil, capaciteOreille, coeffCamouflage, coeffCarapace, coeffNageoire);
+    } 
     // else if (type ==3){
     //     return new BestiolePrevoyante(persoMult, age, champOeil, distanceOeil, distanceOreille, capaciteOeil, capaciteOreille, coeffCamouflage, coeffCarapace, coeffNageoire);
     // } 

@@ -8,7 +8,7 @@
 
 const double      Bestiole::AFF_SIZE = 8.;
 const double      Bestiole::MAX_VITESSE = 10.;
-const double      Bestiole::LIMITE_VUE = 30.;
+const double      Bestiole::LIMITE_VUE = 50.;
 
 int               Bestiole::next = 0;
 
@@ -220,6 +220,5 @@ void Bestiole::setVitesse(double v)
 }
 void Bestiole::setOrientation(double o)
 {
-
-   this->orientation = orientation;
+   this->orientation = o;
 }

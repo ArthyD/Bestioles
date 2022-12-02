@@ -1,7 +1,6 @@
-#include "BestiolePeureuse.h"
-#include <cmath>
+#include "BestioleGregaire.h"
 
-BestiolePeureuse::BestiolePeureuse(void)
+BestioleGregaire::BestioleGregaire(void)
 {
 
    identite = ++next;
@@ -30,12 +29,9 @@ BestiolePeureuse::BestiolePeureuse(void)
    coeffCamouflage = 0;
    coeffCarapace = 1;
    coeffNageoire = 1;
-
-   agoraphobe = 2;
-   fuite = false;
-   compteur = 1000;
 }
-BestiolePeureuse::BestiolePeureuse(bool pM, double t, int a, double champo, double disto, double distOr, double capaOeil, double capaOreille, double coeffCamou, double coeffCarap, double coeffNag, int ago){
+
+BestioleGregaire::BestioleGregaire(bool pM, double t, int a, double champo, double disto, double distOr, double capaOeil, double capaOreille, double coeffCamou, double coeffCarap, double coeffNag){
    
    identite = ++next;
    cout << "Naissance Bestiole (" << identite << ") peureuse" << endl;
@@ -62,33 +58,20 @@ BestiolePeureuse::BestiolePeureuse(bool pM, double t, int a, double champo, doub
    coeffCamouflage = coeffCamou;
    coeffCarapace = coeffCarap;
    coeffNageoire = coeffNag;
-
-   agoraphobe = ago;
-   fuite = false; //PARAM
-   compteur = 1000; //PARAM
     
-    std::cout << "Create bestiole peureuse" << std::endl;
-}  
+    std::cout << "Create bestiole gregaire" << std::endl;
+} 
 
-BestiolePeureuse::~BestiolePeureuse(){};
+BestioleGregaire::~BestioleGregaire(){
+};
 
-void BestiolePeureuse::update(std::vector<Bestiole*>& vectorBestioleProche){
-    if (fuite){
-        if (compteur == 0) {
-            fuite = false;
-            vitesse = vitesse / 2;
-        } else {
-            compteur -=1;
+void BestioleGregaire::update(vector<Bestiole*>& vectorBestioleProche){
+    double moyenne = 0;
+    if(vectorBestioleProche.size() !=0){
+        for (std::vector<Bestiole*>::iterator it = vectorBestioleProche.begin() ; it != vectorBestioleProche.end() ; it++){
+                moyenne += (*it)->getOrientation();
         }
-    } else if(vectorBestioleProche.size() >= agoraphobe){
-        double pi = M_PI;
-        fuite = true;
-        if (orientation < pi){
-            orientation += pi;
-        } else {
-            orientation -= pi;
-        }
-        vitesse = vitesse * 2;
-        compteur = 1000;
+        moyenne = moyenne/vectorBestioleProche.size();
+        orientation = moyenne;
     }
 }

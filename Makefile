@@ -1,5 +1,5 @@
-main : main.cpp Aquarium.o Bestiole.o  BestiolePeureuse.o BestioleFactory.o Milieu.o
-	g++ -Wall -std=c++11 -o main main.cpp Aquarium.o Bestiole.o BestiolePeureuse.o BestioleFactory.o Milieu.o -I . -lX11 -lpthread
+main : main.cpp Aquarium.o Bestiole.o  BestiolePeureuse.o BestioleGregaire.o BestioleFactory.o Milieu.o
+	g++ -Wall -std=c++11 -o main main.cpp Aquarium.o Bestiole.o BestiolePeureuse.o BestioleGregaire.o BestioleFactory.o Milieu.o -I . -lX11 -lpthread
 
 Aquarium.o : Aquarium.h Aquarium.cpp
 	g++ -Wall -std=c++11  -c Aquarium.cpp -I .
@@ -9,6 +9,9 @@ Bestiole.o : Bestiole.h Bestiole.cpp
 
 BestiolePeureuse.o : BestiolePeureuse.h BestiolePeureuse.cpp
 	g++ -Wall -std=c++11  -c BestiolePeureuse.cpp -I .
+
+BestioleGregaire.o : BestioleGregaire.h BestioleGregaire.cpp
+	g++ -Wall -std=c++11  -c BestioleGregaire.cpp -I .
 
 BestioleFactory.o : BestioleFactory.h BestiolePeureuse.h BestioleFactory.cpp
 	g++ -Wall -std=c++11  -c BestioleFactory.cpp -I .
