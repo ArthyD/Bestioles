@@ -73,6 +73,39 @@ void Milieu::step( void ){
 }
 
 void Milieu::phaseEnvironnement( void ){
+   // Gestion de l'âge
+   // Si la bestiole atteint son âge maximal, elle meurt
+   for ( std::list<Bestiole*>::iterator it1 = listeBestioles.begin() ; 
+         it1 != listeBestioles.end() ; it1++ ){
+      (**it1).vieillit();
+      if ((**it1).getAnneesRestantes()==0){
+         listeBestioles.remove(*it1);
+      }
+   }
+
+   // Gestion des collisions
+   std::vector<Bestiole*> collisions;
+   for ( std::list<Bestiole*>::iterator it1 = listeBestioles.begin() ; 
+         it1 != listeBestioles.end() ; it1++ ){
+      for ( std::list<Bestiole*>::iterator it2 = listeBestioles.begin() ; 
+            it2 != it1 ; it2++ ){
+         if (checkCollision((*it1),(*it2))){
+            collisions.push_back(*it1);
+            collisions.push_back(*it2);
+         }
+      }
+   }  
+
+   for ( std::vector<Bestiole*>::iterator it1 = collisions.begin() ; 
+         it1 != collisions.end() ; it1++ ){
+            if(**it1.collision()){
+               listeBestioles.remove(*it1);
+            }
+            else{
+               **it1.rebondit();
+            }
+
+         }
 
    // Changement de personalité des personalités multiples
    for ( std::list<Bestiole*>::iterator it1 = listeBestioles.begin() ; it1 != listeBestioles.end() ; it1++ ){
@@ -89,6 +122,7 @@ void Milieu::phaseEnvironnement( void ){
       }
    }
 }
+
 
 int Milieu::randomPerso(){
    double tirageAlea = static_cast<double>( std::rand()/RAND_MAX);

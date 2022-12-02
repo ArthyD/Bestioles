@@ -42,6 +42,8 @@ public :
    void step( void );
    void phaseAction( void );
    void phaseEnvironnement( void );
+   bool checkCollision(Bestiole* , Bestiole*);
+   void collision(Bestiole*);
    void phaseDetection( void );
    void naissanceAlea( void );  
    int randomPerso(void);
