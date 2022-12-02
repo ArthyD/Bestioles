@@ -72,9 +72,35 @@ Bestiole::~Bestiole( void )
 
 }
 
-Bestiole::Bestiole(bool persoMult, int age, double champOeil, double distanceOeil, double distanceOreille, double capaciteOeil, double capaciteOreille, double coeffCamouflage, double coeffCarapace, double coeffNageoire){
+Bestiole::Bestiole(bool pM, double t, int a, double champo, double disto, double distOr, double capaOeil, double capaOreille, double coeffCamou, double coeffCarap, double coeffNag){
+   
+   identite = ++next;
+   cout << "Naissance Bestiole (" << identite << ") " << endl;
 
-}
+   x = y = 0;
+   cumulX = cumulY = 0.;
+   orientation = static_cast<double>( rand() )/RAND_MAX*2.*M_PI;
+   vitesse = static_cast<double>( rand() )/RAND_MAX*MAX_VITESSE;
+
+   couleur = new T[ 3 ];
+   couleur[ 0 ] = static_cast<int>( static_cast<double>( rand() )/RAND_MAX*230. );
+   couleur[ 1 ] = static_cast<int>( static_cast<double>( rand() )/RAND_MAX*230. );
+   couleur[ 2 ] = static_cast<int>( static_cast<double>( rand() )/RAND_MAX*230. );
+
+   persoMult = pM;
+   taille = t;
+
+   champOeil = champo;
+   champOreille = 2*M_PI;
+   distanceOeil = disto;
+   distanceOreille = distOr;
+   capaciteOeil = capaOeil;
+   capaciteOreille = capaOreille;
+   coeffCamouflage = coeffCamou;
+   coeffCarapace = coeffCarap;
+   coeffNageoire = coeffNag;
+    
+} 
 
 void Bestiole::initCoords( int xLim, int yLim )
 {
@@ -166,14 +192,55 @@ void Bestiole::rebondit(Bestiole * pBestiole)
    this->vitesse*=-1;
 }
 
-Bestiole Bestiole::clone()
+Bestiole* Bestiole::clone()
 {
-   return(Bestiole(*this));
+   Bestiole* clone = new Bestiole();
+   clone->next=next;
+   clone->x=x;
+   clone->y=y;
+   clone->cumulX=cumulX;
+   clone->cumulY=cumulY;
+   clone->vitesse=vitesse;
+   clone->orientation=orientation;
+   clone->anneesRestantes=anneesRestantes;
+   clone->couleur=couleur;
+   clone->persoMult=persoMult;
+   clone->taille=taille;
+   clone->champOeil=champOeil;
+   clone->champOreille=champOreille;
+   clone->distanceOeil=distanceOeil;
+   clone->distanceOreille=distanceOreille;
+   clone->capaciteOeil=capaciteOeil;
+   clone->capaciteOreille=capaciteOreille;
+   clone->coeffCamouflage=coeffCamouflage;
+   clone->coeffCarapace=coeffCarapace;
+   clone->coeffNageoire=coeffNageoire;
+   return clone;
 } 
 
-Bestiole Bestiole::clone(Bestiole bestiolePrototype)
+// Ici on prend tout les arguments de la bestiole donnée en entrée
+void Bestiole::clone(Bestiole* bestiolePrototype)
 {
-   return(Bestiole(bestiolePrototype));
+   next=bestiolePrototype->next;
+   identite=bestiolePrototype->identite;
+   x=bestiolePrototype->x;
+   y=bestiolePrototype->y;
+   cumulX=bestiolePrototype->cumulX;
+   cumulY=bestiolePrototype->cumulY;
+   orientation=bestiolePrototype->orientation;
+   vitesse=bestiolePrototype->vitesse;
+   couleur=bestiolePrototype->couleur;
+   anneesRestantes=bestiolePrototype->anneesRestantes;
+   persoMult=bestiolePrototype->persoMult;
+   taille=bestiolePrototype->taille;
+   champOeil=bestiolePrototype->champOeil;
+   champOreille=bestiolePrototype->champOreille;
+   distanceOeil=bestiolePrototype->distanceOeil;
+   distanceOreille=bestiolePrototype->distanceOreille;
+   capaciteOeil=bestiolePrototype->capaciteOeil;
+   capaciteOreille=bestiolePrototype->capaciteOreille;
+   coeffCamouflage=bestiolePrototype->coeffCamouflage;
+   coeffNageoire=bestiolePrototype->coeffNageoire;
 } 
 
 bool Bestiole::hasOreille()
@@ -220,5 +287,5 @@ void Bestiole::setVitesse(double v)
 }
 void Bestiole::setOrientation(double o)
 {
-   this->orientation = o;
+   orientation = o;
 }
