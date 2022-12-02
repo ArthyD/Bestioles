@@ -71,22 +71,13 @@ void Milieu::step( void ){
    //naissanceAlea();
 
 }
-
+bool estMorte(Bestiole* b) { b->vieillit(); return (b->getAnneesRestantes() <= 0); }
 void Milieu::phaseEnvironnement( void ){
    // Gestion de l'âge
    // Si la bestiole atteint son âge maximal, elle meurt
-   for ( std::list<Bestiole*>::iterator it1 = listeBestioles.begin() ; 
-         it1 != listeBestioles.end() ; it1++ ){
-      (**it1).vieillit();
-      std::cout << *it1 << std::endl;
-      std::cout << "années" << (**it1).getAnneesRestantes() << std::endl;
-      if ((**it1).getAnneesRestantes()==0){
-         listeBestioles.remove(*it1);
-         delete(*it1);
-      }
-   }
+   listeBestioles.erase(std::remove_if(listeBestioles.begin(), listeBestioles.end(), estMorte), listeBestioles.end());
 
-   // Gestion des collisions
+   Gestion des collisions
    std::vector<Bestiole*> collisions;
    for ( std::list<Bestiole*>::iterator it1 = listeBestioles.begin() ; 
          it1 != listeBestioles.end() ; it1++ ){
