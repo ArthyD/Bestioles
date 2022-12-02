@@ -2,6 +2,8 @@
 
 #include <stdlib.h>
 #include <time.h>
+#include <fstream>
+#include <string>
 
 
 double distanceOreille = 0;
@@ -15,7 +17,10 @@ double coeffDebuffCarapace = 0;
 double coeffNageoire = 1;
 
 BestioleFactory::BestioleFactory()
-{}
+{
+    readConfig();
+
+}
 
 BestioleFactory::~BestioleFactory()
 {}
@@ -24,7 +29,85 @@ BestioleFactory::~BestioleFactory()
 double BestioleFactory::randomDouble(double min, double max) {
     return static_cast<double>( rand() )/RAND_MAX*max;
 }
+void BestioleFactory::readConfig(void)
+{
 
+   ifstream fichier("./config.txt", ios::in);
+   if (fichier)
+   {
+            std::string ligne;
+            std::string champ;
+            double valeur;
+            for (int i =0;  i < 32; i++)
+        {
+            getline(fichier, ligne);
+            std::size_t pos = ligne.find("=");
+            champ = ligne.substr(0,pos);
+            valeur = stod(ligne.substr(pos+1));
+            if (champ == "Champ Oeil Maximal") {
+             champOeilMax = valeur;
+            }
+            if (champ == "Champ Oeil Mininal") {
+                champOeilMin = valeur;
+            }
+            if (champ == "Distance de vue Maximale") {
+             distanceOeilMax = valeur;
+            }            
+            if (champ == "Distance de vue Minimale") {
+             distanceOeilMin = valeur;
+            }
+            if (champ == "Capacite Oeil Maximale") {
+             capaciteOeilMax = valeur;
+            }
+            if (champ == "Capacite Oeil Mininale") {
+             capaciteOeilMin = valeur;
+            }
+            if (champ == "Distance Oreille Mininale") {
+              distanceOreilleMin = valeur;
+            }
+            if (champ == "Distance Oreille Maximale") {
+             distanceOreilleMax = valeur;
+            }            
+            if (champ == "Capacite Oreille Maximale") {
+             capaciteOreilleMax = valeur;
+            }
+            if (champ == "Capacite Oreille Minimale") {
+             capaciteOreilleMin = valeur;
+            }
+            if (champ == "Coefficient Nageoire") {
+             coeffNageoire = valeur;
+            }
+            if (champ == "Coefficient Carapace Maximal") {
+                coeffCarapaceMax = valeur;
+            }
+            if (champ == "Coefficient Debuff Carapace Maximal") {
+             coeffDebuffCarapaceMax = valeur;
+            }            
+            if (champ == "Coefficient Camouflage Maximal") {
+             coeffCamouflageMax = valeur;
+            }
+            if (champ == "Coefficient Camouflage Mininmal") {
+             coeffCamouflageMin = valeur;
+            }
+            if (champ == "Agoraphobie Minimale") {
+                agoraMin = valeur;
+            }
+            if (champ == "Agoraphobie Maximale") {
+                agoraMax = valeur;
+            }            
+            if (champ == "Taille Maximale") {
+                taillemax = valeur;
+            }
+            if (champ == "Age Maximal") {
+                agemax = valeur;
+            }                       
+        }
+   }
+   else {
+      cerr << "Impossible d'ouvrir le fichier de configuration !" << endl;
+   }
+   fichier.close();
+}
 Bestiole* BestioleFactory::creationBestiole(bool persoMult, int type, bool aOreille, bool aYeux, bool aCamouflage, bool aCarapace, bool aNageoires){
     
     if (aOreille){

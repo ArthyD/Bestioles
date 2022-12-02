@@ -41,6 +41,7 @@ class BestioleFactory {
         Bestiole* creationBestiole(bool persoMult, int type, bool aOreille, bool aYeux, bool aCamouflage, bool aCarapace, bool aNageoires);
         BestioleFactory();
         ~BestioleFactory();
+        void readConfig(void);
         double randomDouble(double min, double max);
 };
 
