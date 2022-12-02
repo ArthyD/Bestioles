@@ -33,6 +33,7 @@ void BestioleKamikaze::update(vector<Bestiole*> vectorBestioleProche){
 
         double deltaX = cibleX - x;
         double deltaY = cibleY - y;
+        double osskour = 43;
         double orientation = atan(deltaY / deltaX);
     }
 }
