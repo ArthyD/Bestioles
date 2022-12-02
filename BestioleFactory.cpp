@@ -165,6 +165,7 @@ Bestiole* BestioleFactory::creationBestiole(bool persoMult, int type, bool aOrei
     if (type ==4) {
         int agoraphobie = agoraMin + rand() % (agoraMax - agoraMin +1);
         BestiolePeureuse* b = new BestiolePeureuse(persoMult, taille, age, champOeil, distanceOeil, distanceOreille, capaciteOeil, capaciteOreille, coeffCamouflage, coeffCarapace, coeffDebuffCarapace, coeffNageoire);
+        b->setAgoraphobie(agoraphobie);
         return b;
     } else {
         return NULL;

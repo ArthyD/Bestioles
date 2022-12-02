@@ -92,19 +92,20 @@ void Milieu::phaseEnvironnement( void ){
 
 int Milieu::randomPerso(){
    double tirageAlea = static_cast<double>( std::rand()/RAND_MAX);
+   int type = 1;
    if (tirageAlea < pourcentageGregaire){
-      return 2;
-   if (tirageAlea < pourcentageGregaire + pourcentagePeureuse)
+      type = 2;
+   else if (tirageAlea < pourcentageGregaire + pourcentagePeureuse)
    {
-      return 4;
+      type = 4;
    }
-      if (tirageAlea < pourcentageGregaire + pourcentagePeureuse + pourcentageKamikaze)
+   else if (tirageAlea < pourcentageGregaire + pourcentagePeureuse + pourcentageKamikaze)
    {
-      return 1;
+      type = 1;
    }
-   else return 3;
+   else type = 3;
    }
-
+   return type;
 }
 
 void Milieu::naissanceAlea( void ){
@@ -113,15 +114,15 @@ void Milieu::naissanceAlea( void ){
    BestioleFactory factory;
    if (tirageAlea < probaNaissance)
    {
-      bool persoMult,type,aOreille,aYeux,aCamouflage,aCarapace,aNageoires;
+      bool persoMult,aOreille,aYeux,aCamouflage,aCarapace,aNageoires;
       persoMult = std::rand()%2;
-      type = std::rand()%2;
       aYeux = std::rand()%2;
+      aOreille = std::rand()%2;
       aCamouflage = std::rand()%2;
       aCarapace = std::rand()%2;
       aNageoires = std::rand()%2;
       int persoAlea = randomPerso();
-      Bestiole* best = factory.creationBestiole(persoMult, persoAlea, aOreille, aYeux, aCamouflage, aCamouflage, aNageoires);
+      Bestiole* best = factory.creationBestiole(persoMult, persoAlea, aOreille, aYeux, aCamouflage, aCarapace, aNageoires);
       addMember(best);
    }
 }
