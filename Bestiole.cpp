@@ -166,6 +166,36 @@ void Bestiole::rebondit(Bestiole * pBestiole)
    this->vitesse*=-1;
 }
 
+// Fonction : chechCollision
+// Entrée : Deux bestioles
+// Sortie : Booléen
+// Action : Détermine si deux bestioles se touchent
+// (prend en compte la distance entre les deux bestioles, et leur taille).
+bool Bestiole::checkCollision(Bestiole* bestiole2){
+   int x1 = this->x;
+   int x2 = (*bestiole2).getX();
+   int y1 = this->y;
+   int y2 = (*bestiole2).getY();
+   int taille1 = this->taille;
+   int taille2 = (*bestiole2).getTaille();
+
+   int distanceCarre = (x2-x1)*(x2-x1) + (y2-y1)*(y2-y1);
+   return (distanceCarre < ((((taille1)/2) + ((taille2)/2))*(((taille1)/2) + ((taille2)/2))));
+}
+
+// Fonction : collision
+// Entrée : Une bestiole
+// Sortie : Rien
+// Action : Détermine si une bestiole meurt suite à une collision
+// (prend en compte la carapace de la bestiole).
+// Si la bestiole ne meurt pas, elle rebondie.
+bool Bestiole::collision(){
+   double carap = this->coeffCarapace;
+   double probaMort = (std::rand()/RAND_MAX)/carap;
+   return (probaMort > 0.5);
+}
+
+
 Bestiole Bestiole::clone()
 {
    return(Bestiole(*this));
@@ -213,6 +243,14 @@ double Bestiole::getVitesse()
 int Bestiole::getIdentite()
 {
    return (this->identite);
+}
+int Bestiole::getAnneesRestantes()
+{
+   return (this->anneesRestantes);
+}
+int Bestiole::getTaille()
+{
+   return (this->taille);
 }
 void Bestiole::setVitesse(double v)
 {

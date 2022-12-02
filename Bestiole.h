@@ -69,6 +69,8 @@ public :                                           // Forme canonique :
 
    virtual void update(std::vector<Bestiole*>& vectorBestioleProche) {std::cout<< "Mauvais update" << std::endl;};
    void rebondit( Bestiole * b );
+   bool checkCollision(Bestiole* b);
+   bool collision();
    Bestiole clone();
    Bestiole clone(Bestiole b);
    bool hasOeil();
@@ -79,6 +81,8 @@ public :                                           // Forme canonique :
    double getOrientation();
    double getVitesse();
    int getIdentite();
+   int getAnneesRestantes();
+   int getTaille();
 
    void setOrientation(double o);
    void setVitesse(double v);
