@@ -2,6 +2,7 @@
 #define _BESTIOLEFACTORY_
 #include "Bestiole.h"
 #include "BestiolePeureuse.h"
+#include "BestioleGregaire.h"
 
 class BestioleFactory {
     private :

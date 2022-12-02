@@ -5,7 +5,9 @@
 
 class BestioleGregaire : public Bestiole {        
 public :  
-  BestioleGregaire(bool persoMult, int age, double champOeil, double distanceOeil, double distanceOreille, double capaciteOeil, double capaciteOreille, double coeffCamouflage, double coeffCarapace, double coeffNageoire);      
-  void update(vector<Bestiole*> vectorBestioleProche);        
+  BestioleGregaire(bool pM, double t, int a, double champo, double disto, double distOr, double capaOeil, double capaOreille, double coeffCamou, double coeffCarap, double coeffNag);      
+  void update(vector<Bestiole*>& vectorBestioleProche);   
+  BestioleGregaire(void );
+  ~BestioleGregaire( void );     
 };
 #endif
