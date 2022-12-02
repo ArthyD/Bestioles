@@ -2,6 +2,8 @@
 
 #include <cstdlib>
 #include <ctime>
+#include <random>
+#include <iostream>
 
 const T    Milieu::white[] = { (T)255, (T)255, (T)255 };
 
@@ -37,9 +39,40 @@ void Milieu::phaseEnvironnement( void ){
 
 }
 
+int Milieu::randomPerso(){
+   double tirageAlea = static_cast<double>( std::rand()/RAND_MAX);
+   if (tirageAlea < pourcentageGregaire){
+      return 2;
+   if (tirageAlea < pourcentageGregaire + pourcentagePeureuse)
+   {
+      return 4;
+   }
+      if (tirageAlea < pourcentageGregaire + pourcentagePeureuse + pourcentageKamikaze)
+   {
+      return 1;
+   }
+   return 3;
+   }
+
+}
+
 void Milieu::naissanceAlea( void ){
 
-
+   double tirageAlea = static_cast<double>( std::rand()/RAND_MAX);
+   BestioleFactory factory;
+   if (tirageAlea < probaNaissance)
+   {
+      bool persoMult,type,aOreille,aYeux,aCamouflage,aCarapace,aNageoires;
+      persoMult = std::rand()%2;
+      type = std::rand()%2;
+      aYeux = std::rand()%2;
+      aCamouflage = std::rand()%2;
+      aCarapace = std::rand()%2;
+      aNageoires = std::rand()%2;
+      int persoAlea = randomPerso();
+      Bestiole* best = factory.creationBestiole(persoMult, persoAlea, aOreille, aYeux, aCamouflage, aCamouflage, aNageoires);
+      addMember(best);
+   }
 }
 
 void Milieu::phaseDetection ( void ){
