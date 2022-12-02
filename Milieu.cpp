@@ -31,7 +31,7 @@ void Milieu::step( void ){
    phaseDetection();
    phaseAction();
    //PhaseEnvironnement();
-   naissanceAlea();
+   //naissanceAlea();
 
 }
 
