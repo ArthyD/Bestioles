@@ -1,11 +1,12 @@
 #include "BestiolePrevoyante.h"
+#include <cmath>
 
 BestiolePrevoyante::BestiolePrevoyante(void)
 {
 
    identite = ++next;
 
-   cout << "Naissance Bestiole (" << identite << ") peureuse" << endl;
+   cout << "Naissance Bestiole (" << identite << ") prevoyante" << endl;
 
    x = y = 0;
    cumulX = cumulY = 0.;
@@ -34,7 +35,7 @@ BestiolePrevoyante::BestiolePrevoyante(void)
 BestiolePrevoyante::BestiolePrevoyante(bool pM, double t, int a, double champo, double disto, double distOr, double capaOeil, double capaOreille, double coeffCamou, double coeffCarap, double coeffNag){
    
    identite = ++next;
-   cout << "Naissance Bestiole (" << identite << ") peureuse" << endl;
+   cout << "Naissance Bestiole (" << identite << ") prevoyante" << endl;
 
    x = y = 0;
    cumulX = cumulY = 0.;
@@ -84,6 +85,9 @@ void BestiolePrevoyante::update(vector<Bestiole*>& vectorBestioleProche){
             meilleurEcart = ecart;
             meilleureOrientation = (*(it) + *(it+1)) / 2;
         }
+    }
+    if (2*M_PI + *(mauvaisesOrientations.begin()) - *(mauvaisesOrientations.end()) > meilleurEcart) {
+        meilleureOrientation = ((*(mauvaisesOrientations.begin()) + *(mauvaisesOrientations.end()) ) / 2) + M_PI;
     }
     orientation = meilleureOrientation;
 }
