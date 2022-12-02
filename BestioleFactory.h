@@ -23,9 +23,7 @@ class BestioleFactory {
         //nageoires
         double coeffNageoire;
         //carapace
-        double coeffCarapaceMin;
         double coeffCarapaceMax;
-        double coeffDebuffCarapaceMin;
         double coeffDebuffCarapaceMax;
         //camouflage;
         double coeffCamouflageMin;
