@@ -77,7 +77,7 @@ void Milieu::phaseEnvironnement( void ){
    // Si la bestiole atteint son âge maximal, elle meurt
    listeBestioles.erase(std::remove_if(listeBestioles.begin(), listeBestioles.end(), estMorte), listeBestioles.end());
 
-   Gestion des collisions
+   //Gestion des collisions
    std::vector<Bestiole*> collisions;
    for ( std::list<Bestiole*>::iterator it1 = listeBestioles.begin() ; 
          it1 != listeBestioles.end() ; it1++ ){
