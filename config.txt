@@ -1,7 +1,7 @@
-Pourcentage Kamikaze=0.1
-Pourcentage Peureuse=0.30
-Pourcentage Grégaire=0.45
-Pourcentage Prevoyante=0.15
+Pourcentage Kamikaze=0.0
+Pourcentage Peureuse=1.00
+Pourcentage Grégaire=0.00
+Pourcentage Prevoyante=0.00
 Pourcentage Pourcentage Personnalité Multiple=0.0
 Champ Oeil Maximal=6,2831
 Champ Oeil Mininal=0.0

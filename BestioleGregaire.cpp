@@ -34,10 +34,10 @@ BestioleGregaire::BestioleGregaire(bool pM, double t, int a, double champo, doub
 
 BestioleGregaire::~BestioleGregaire(){};
 
-void BestioleGregaire::update(vector<Bestiole*>& vectorBestioleProche){
+void BestioleGregaire::update(vector<std::shared_ptr<Bestiole>>& vectorBestioleProche){
     double moyenne = 0;
     if(vectorBestioleProche.size() !=0){
-        for (std::vector<Bestiole*>::iterator it = vectorBestioleProche.begin() ; it != vectorBestioleProche.end() ; it++){
+        for (std::vector<std::shared_ptr<Bestiole>>::iterator it = vectorBestioleProche.begin() ; it != vectorBestioleProche.end() ; it++){
                 moyenne += (*it)->getOrientation();
         }
         moyenne = moyenne/vectorBestioleProche.size();

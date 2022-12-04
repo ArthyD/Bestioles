@@ -35,7 +35,7 @@ BestiolePrevoyante::BestiolePrevoyante(bool pM, double t, int a, double champo, 
 
 BestiolePrevoyante::~BestiolePrevoyante(){};
 
-void BestiolePrevoyante::update(vector<Bestiole*>& vectorBestioleProche){
+void BestiolePrevoyante::update(vector<std::shared_ptr<Bestiole>>& vectorBestioleProche){
 
     vector<double> mauvaisesOrientations;
 

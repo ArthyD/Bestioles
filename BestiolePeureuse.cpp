@@ -7,6 +7,10 @@ BestiolePeureuse::BestiolePeureuse(void)
    fuite = false;
    compteur = 1000;
 }
+BestiolePeureuse::~BestiolePeureuse(void)
+{
+
+}
 
 BestiolePeureuse::BestiolePeureuse(bool pM, double t, int a, double champo, double disto, double distOr, double capaOeil, double capaOreille, double coeffCamou, double coeffCarap, double coeffDebuffCarap, double coeffNag){
     identite = ++next;
@@ -48,7 +52,7 @@ void BestiolePeureuse::setAgoraphobie(int agor){
 
 
 
-void BestiolePeureuse::update(std::vector<Bestiole*>& vectorBestioleProche){
+void BestiolePeureuse::update(std::vector<std::shared_ptr<Bestiole>>& vectorBestioleProche){
     if (fuite){
         if (compteur == 0) {
             fuite = false;

@@ -5,6 +5,7 @@
 #include "UImg.h"
 #include <iostream>
 #include <vector>
+#include <memory>
 
 
 using namespace std;
@@ -68,12 +69,12 @@ public :                                           // Forme canonique :
 
    friend bool operator==( const Bestiole & b1, const Bestiole & b2 );
 
-   virtual void update(std::vector<Bestiole*>& vectorBestioleProche) {std::cout<< "Mauvais update" << std::endl;};
+   virtual void update(std::vector<std::shared_ptr<Bestiole>>& vectorBestioleProche) {std::cout<< "Mauvais update" << std::endl;};
    void rebondit();
-   bool checkCollision(Bestiole* b);
+   bool checkCollision(std::shared_ptr<Bestiole> b);
    bool collision();
-   virtual Bestiole* clone();
-   virtual void clone(Bestiole* b);
+   virtual std::shared_ptr<Bestiole> clone();
+   virtual void clone(std::shared_ptr<Bestiole> b);
    bool hasOeil();
    bool hasOreille();
    bool isPersoMult();

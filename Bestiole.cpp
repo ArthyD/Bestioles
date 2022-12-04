@@ -4,6 +4,7 @@
 
 #include <cstdlib>
 #include <cmath>
+#include <memory>
 
 
 const double      Bestiole::AFF_SIZE = 8.;
@@ -179,7 +180,9 @@ bool operator==( const Bestiole & b1, const Bestiole & b2 )
 
 }
 
-
+// bool Bestiole::jeTeVois(const Bestiole  & b) const{
+//    return false;
+// }
 bool Bestiole::jeTeVois( const Bestiole & b ) const{
    double dist;
    double angleEntreBestioles;
@@ -237,7 +240,7 @@ void Bestiole::rebondit()
 // Sortie : Booléen
 // Action : Détermine si deux bestioles se touchent
 // (prend en compte la distance entre les deux bestioles, et leur taille).
-bool Bestiole::checkCollision(Bestiole* bestiole2){
+bool Bestiole::checkCollision(std::shared_ptr<Bestiole> bestiole2){
    int x1 = this->x;
    int x2 = (*bestiole2).getX();
    int y1 = this->y;
@@ -262,9 +265,9 @@ bool Bestiole::collision(){
 }
 
 
-Bestiole* Bestiole::clone()
+std::shared_ptr<Bestiole> Bestiole::clone()
 {
-   Bestiole* clone = new Bestiole();
+   std::shared_ptr<Bestiole> clone {new Bestiole()};
    clone->next=next;
    clone->x=x;
    clone->y=y;
@@ -290,7 +293,7 @@ Bestiole* Bestiole::clone()
 } 
 
 // Ici on prend tout les arguments de la bestiole donnée en entrée
-void Bestiole::clone(Bestiole* bestiolePrototype)
+void Bestiole::clone(std::shared_ptr<Bestiole> bestiolePrototype)
 {
    next=bestiolePrototype->next;
    identite=bestiolePrototype->identite;

@@ -110,7 +110,7 @@ void BestioleFactory::readConfig(void)
    }
    fichier.close();
 }
-Bestiole* BestioleFactory::creationBestiole(bool persoMult, int type, bool aOreille, bool aYeux, bool aCamouflage, bool aCarapace, bool aNageoires){
+std::shared_ptr<Bestiole> BestioleFactory::creationBestiole(bool persoMult, int type, bool aOreille, bool aYeux, bool aCamouflage, bool aCarapace, bool aNageoires){
     
     if (aOreille){
         distanceOreille = randomDouble(distanceOreilleMin,distanceOreilleMax); 
@@ -155,18 +155,18 @@ Bestiole* BestioleFactory::creationBestiole(bool persoMult, int type, bool aOrei
     double taille = randomDouble(1.0,taillemax);
     //création de la bestiole choisie via le type
     if (type==1){
-        return new BestioleKamikaze(persoMult, taille, age, champOeil, distanceOeil, distanceOreille, capaciteOeil, capaciteOreille, coeffCamouflage, coeffCarapace, coeffDebuffCarapace, coeffNageoire);
+        return std::shared_ptr<Bestiole>(new BestioleKamikaze(persoMult, taille, age, champOeil, distanceOeil, distanceOreille, capaciteOeil, capaciteOreille, coeffCamouflage, coeffCarapace, coeffDebuffCarapace, coeffNageoire));
     } 
     if (type ==2){
-        return new BestioleGregaire(persoMult, taille, age, champOeil, distanceOeil, distanceOreille, capaciteOeil, capaciteOreille, coeffCamouflage, coeffCarapace, coeffDebuffCarapace, coeffNageoire);
+        return std::shared_ptr<Bestiole>(new BestioleGregaire(persoMult, taille, age, champOeil, distanceOeil, distanceOreille, capaciteOeil, capaciteOreille, coeffCamouflage, coeffCarapace, coeffDebuffCarapace, coeffNageoire));
     } 
     else if (type ==3){
-        return new BestiolePrevoyante(persoMult, taille, age, champOeil, distanceOeil, distanceOreille, capaciteOeil, capaciteOreille, coeffCamouflage, coeffCarapace, coeffDebuffCarapace, coeffNageoire);
+        return std::shared_ptr<Bestiole>(new BestiolePrevoyante(persoMult, taille, age, champOeil, distanceOeil, distanceOreille, capaciteOeil, capaciteOreille, coeffCamouflage, coeffCarapace, coeffDebuffCarapace, coeffNageoire));
     } 
     if (type ==4) {
         int agoraphobie = agoraMin + rand() % (agoraMax - agoraMin +1);
-        BestiolePeureuse* b = new BestiolePeureuse(persoMult, taille, age, champOeil, distanceOeil, distanceOreille, capaciteOeil, capaciteOreille, coeffCamouflage, coeffCarapace, coeffDebuffCarapace, coeffNageoire);
-        b->setAgoraphobie(agoraphobie);
+        std::shared_ptr<Bestiole> b {new BestiolePeureuse(persoMult, taille, age, champOeil, distanceOeil, distanceOreille, capaciteOeil, capaciteOreille, coeffCamouflage, coeffCarapace, coeffDebuffCarapace, coeffNageoire)} ;
+        std::dynamic_pointer_cast<BestiolePeureuse>(b)->setAgoraphobie(agoraphobie);
         return b;
     } else {
         return NULL;

@@ -6,6 +6,7 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+#include <memory>
 
 const T    Milieu::white[] = { (T)255, (T)255, (T)255 };
 
@@ -71,17 +72,17 @@ void Milieu::step( void ){
    //naissanceAlea();
 
 }
-bool estMorte(Bestiole* b) { b->vieillit(); return (b->getAnneesRestantes() <= 0); }
+bool estMorte(std::shared_ptr<Bestiole> b) { b->vieillit(); return (b->getAnneesRestantes() <= 0); }
 void Milieu::phaseEnvironnement( void ){
    // Gestion de l'âge
    // Si la bestiole atteint son âge maximal, elle meurt
    listeBestioles.erase(std::remove_if(listeBestioles.begin(), listeBestioles.end(), estMorte), listeBestioles.end());
 
    //Gestion des collisions
-   std::vector<Bestiole*> collisions;
-   for ( std::list<Bestiole*>::iterator it1 = listeBestioles.begin() ; 
+   std::vector<std::shared_ptr<Bestiole>> collisions;
+   for ( std::list<std::shared_ptr<Bestiole>>::iterator it1 = listeBestioles.begin() ; 
          it1 != listeBestioles.end() ; it1++ ){
-      for ( std::list<Bestiole*>::iterator it2 = listeBestioles.begin() ; 
+      for ( std::list<std::shared_ptr<Bestiole>>::iterator it2 = listeBestioles.begin() ; 
             it2 != it1 ; it2++ ){
          if ((*it2)->checkCollision((*it1))){
             collisions.push_back(*it1);
@@ -90,7 +91,7 @@ void Milieu::phaseEnvironnement( void ){
       }
    }  
 
-   for ( std::vector<Bestiole*>::iterator it1 = collisions.begin() ; 
+   for ( std::vector<std::shared_ptr<Bestiole>>::iterator it1 = collisions.begin() ; 
          it1 != collisions.end() ; it1++ ){
             if((**it1).collision()){
                listeBestioles.remove(*it1);
@@ -102,15 +103,14 @@ void Milieu::phaseEnvironnement( void ){
          }
 
    // Changement de personalité des personalités multiples
-   for ( std::list<Bestiole*>::iterator it1 = listeBestioles.begin() ; it1 != listeBestioles.end() ; it1++ ){
+   for ( std::list<std::shared_ptr<Bestiole>>::iterator it1 = listeBestioles.begin() ; it1 != listeBestioles.end() ; it1++ ){
       if((*it1)->isPersoMult()){
          if(std::rand()%6000==0){
             int type = randomPerso();
             BestioleFactory factory;
-            Bestiole* best = factory.creationBestiole(true, type, false, false, false, false, false);
+            std::shared_ptr<Bestiole> best = factory.creationBestiole(true, type, false, false, false, false, false);
             best->clone(*it1);
             listeBestioles.remove(*it1);
-            delete(*it1);
             listeBestioles.push_back(best);
          }
       }
@@ -158,15 +158,15 @@ void Milieu::addPersoAlea( void ){
    aCarapace = std::rand()%2;
    aNageoires = std::rand()%2;
    int persoAlea = randomPerso();
-   Bestiole* best = factory.creationBestiole(persoMult, persoAlea, aOreille, aYeux, aCamouflage, aCarapace, aNageoires);
+   std::shared_ptr<Bestiole> best = factory.creationBestiole(persoMult, persoAlea, aOreille, aYeux, aCamouflage, aCarapace, aNageoires);
    addMember(best);
 }
 
 void Milieu::phaseDetection ( void ){
-   std::vector<Bestiole*> bestiolesAlentours;
-   for ( std::list<Bestiole*>::iterator it1 = listeBestioles.begin() ; it1 != listeBestioles.end() ; it1++ )
+   std::vector<std::shared_ptr<Bestiole>> bestiolesAlentours;
+   for ( std::list<std::shared_ptr<Bestiole>>::iterator it1 = listeBestioles.begin() ; it1 != listeBestioles.end() ; it1++ )
    {
-      for ( std::list<Bestiole*>::iterator it2 = listeBestioles.begin() ; it2 != listeBestioles.end() ; it2++ )
+      for ( std::list<std::shared_ptr<Bestiole>>::iterator it2 = listeBestioles.begin() ; it2 != listeBestioles.end() ; it2++ )
       {
          if ((*it1)->getIdentite() != (*it2)->getIdentite()) {
             if ( (*it1)->jeTeVois(**it2) ) 
@@ -184,9 +184,8 @@ void Milieu::phaseAction( void )
 {
 
    cimg_forXY( *this, x, y ) fillC( x, y, 0, white[0], white[1], white[2] );
-   for ( std::list<Bestiole*>::iterator it = listeBestioles.begin() ; it != listeBestioles.end() ; ++it )
+   for ( std::list<std::shared_ptr<Bestiole>>::iterator it = listeBestioles.begin() ; it != listeBestioles.end() ; ++it )
    {
-
       (*it)->action( *this );
       (*it)->draw( *this );
 
@@ -201,7 +200,7 @@ int Milieu::nbVoisins( const Bestiole & b )
    int         nb = 0;
 
 
-   for ( std::list<Bestiole*>::iterator it = listeBestioles.begin() ; it != listeBestioles.end() ; ++it )
+   for ( std::list<std::shared_ptr<Bestiole>>::iterator it = listeBestioles.begin() ; it != listeBestioles.end() ; ++it )
       if ( !(b == **it) && b.jeTeVois(**it) )
          ++nb;
 

@@ -5,6 +5,7 @@
 #include "BestioleGregaire.h"
 #include "BestioleKamikaze.h"
 #include "BestiolePrevoyante.h"
+#include <memory>
 
 class BestioleFactory {
     private :
@@ -38,7 +39,7 @@ class BestioleFactory {
         int agemax;
         
     public :
-        Bestiole* creationBestiole(bool persoMult, int type, bool aOreille, bool aYeux, bool aCamouflage, bool aCarapace, bool aNageoires);
+        std::shared_ptr<Bestiole> creationBestiole(bool persoMult, int type, bool aOreille, bool aYeux, bool aCamouflage, bool aCarapace, bool aNageoires);
         BestioleFactory();
         ~BestioleFactory();
         void readConfig(void);

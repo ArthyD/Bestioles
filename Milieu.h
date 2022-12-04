@@ -21,7 +21,7 @@ private :
    static const T          white[];
 
    int                     width, height;
-   std::list<Bestiole*>   listeBestioles;
+   std::list<std::shared_ptr<Bestiole>>   listeBestioles;
 
    double                    pourcentageKamikaze = 0.15;
    double                    pourcentagePeureuse = 0.25;
@@ -49,7 +49,7 @@ public :
 
    void readConfig( void );
 
-   void addMember(Bestiole* b ) { listeBestioles.push_back(b); listeBestioles.back()->initCoords(width, height); }
+   void addMember(std::shared_ptr<Bestiole> b ) { std::cout << listeBestioles.size() << std::endl; listeBestioles.push_back(b); listeBestioles.back()->initCoords(width, height); }
    int nbVoisins( const Bestiole & b );
 
 };

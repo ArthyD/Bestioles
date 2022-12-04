@@ -13,11 +13,8 @@ int main()
 
    Aquarium       ecosysteme( 640, 480, 30 );
 
-   BestioleFactory factory;
-
-   Milieu mili = ecosysteme.getMilieu();
    for (int i = 0; i<=40; i++){
-      mili.addPersoAlea();
+      ecosysteme.getMilieu().addPersoAlea();
    }
 
    ecosysteme.run();

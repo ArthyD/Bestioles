@@ -50,10 +50,10 @@ BestioleKamikaze::~BestioleKamikaze(){};
 //           bestiole courante. Actualise l'orientation de la bestiole
 //           bestiole courante pour qu'elle se dirige vers la bestiole
 //           la plus proche.
-void BestioleKamikaze::update(vector<Bestiole*> & vectorBestioleProche){
+void BestioleKamikaze::update(vector<std::shared_ptr<Bestiole>> & vectorBestioleProche){
     if (vectorBestioleProche.size() > 0){
         double meilleureDistanceCarre = highValue;
-        for ( std::vector<Bestiole*>::iterator it1 = vectorBestioleProche.begin();
+        for ( std::vector<std::shared_ptr<Bestiole>>::iterator it1 = vectorBestioleProche.begin();
         it1 != vectorBestioleProche.end() ; it1++ ){
             
             deltaX = (**it1).getX() - x;
