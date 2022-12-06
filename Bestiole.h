@@ -36,6 +36,7 @@ protected :
    int anneesRestantes;
 
    bool persoMult;
+   bool hasToBeDeleted = false;
    int taille;
 
    double champOeil;
@@ -73,8 +74,8 @@ public :                                           // Forme canonique :
    void rebondit();
    bool checkCollision(std::shared_ptr<Bestiole> b);
    bool collision();
-   virtual std::shared_ptr<Bestiole> clone();
-   virtual void clone(std::shared_ptr<Bestiole> b);
+   std::shared_ptr<Bestiole> clone();
+   void cloneFromBestiole(std::shared_ptr<Bestiole> b);
    bool hasOeil();
    bool hasOreille();
    bool isPersoMult();
@@ -86,6 +87,8 @@ public :                                           // Forme canonique :
    int getIdentite();
    int getAnneesRestantes();
    int getTaille();
+   void deleteBestiole();
+   bool isDeletedSoon();
 
    void setOrientation(double o);
    void setVitesse(double v);

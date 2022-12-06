@@ -290,7 +290,7 @@ std::shared_ptr<Bestiole> Bestiole::clone()
 } 
 
 // Ici on prend tout les arguments de la bestiole donnée en entrée
-void Bestiole::clone(std::shared_ptr<Bestiole> bestiolePrototype)
+void Bestiole::cloneFromBestiole(std::shared_ptr<Bestiole> bestiolePrototype)
 {
    next=bestiolePrototype->next;
    identite=bestiolePrototype->identite;
@@ -374,4 +374,12 @@ void Bestiole::setVitesse(double v)
 void Bestiole::setOrientation(double o)
 {
    orientation = o;
+}
+
+void Bestiole::deleteBestiole(){
+   hasToBeDeleted = true;
+}
+
+bool Bestiole::isDeletedSoon(){
+   return hasToBeDeleted;
 }

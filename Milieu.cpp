@@ -72,13 +72,20 @@ void Milieu::step( void ){
    //naissanceAlea();
 
 }
-bool estMorte(std::shared_ptr<Bestiole> b) { b->vieillit(); return (b->getAnneesRestantes() <= 0); }
+bool del(std::shared_ptr<Bestiole> b){return b->isDeletedSoon();}
+//bool estMorte(std::shared_ptr<Bestiole> b) { b->vieillit(); return (b->getAnneesRestantes() <= 0); }
 
 void Milieu::phaseEnvironnement( void ){
    // Gestion de l'âge
    // Si la bestiole atteint son âge maximal, elle meurt
-   listeBestioles.erase(std::remove_if(listeBestioles.begin(), listeBestioles.end(), estMorte), listeBestioles.end());
-
+   //listeBestioles.erase(std::remove_if(listeBestioles.begin(), listeBestioles.end(), estMorte), listeBestioles.end());
+   for ( std::list<std::shared_ptr<Bestiole>>::iterator it = listeBestioles.begin() ; 
+            it != listeBestioles.end() ; it++ ){
+         (*it)->vieillit();
+         if((*it)->getAnneesRestantes()<=0){
+            (*it)->deleteBestiole();
+         }
+      }
    //Gestion des collisions
    std::vector<std::shared_ptr<Bestiole>> collisions;
    for ( std::list<std::shared_ptr<Bestiole>>::iterator it1 = listeBestioles.begin() ; 
@@ -103,8 +110,23 @@ void Milieu::phaseEnvironnement( void ){
 
          }
 
+
    // Changement de personalité des personalités multiples
-   listeBestioles.erase(std::remove_if(listeBestioles.begin(), listeBestioles.end(), changePerso), listeBestioles.end());
+   for ( std::list<std::shared_ptr<Bestiole>>::iterator it = listeBestioles.begin() ; 
+         it != listeBestioles.end() ; it++ ){
+      if((*it)->isPersoMult()){
+         if(std::rand()%60==0){
+            int type = randomPerso();
+            BestioleFactory factory;
+            std::shared_ptr<Bestiole> best = factory.creationBestiole(true, type, false, false, false, false, false);
+            cout << "changement" << endl;
+            best->cloneFromBestiole(*it);
+            addMember(best);
+            (*it)->deleteBestiole();   
+         }
+      }
+   }
+   listeBestioles.erase(std::remove_if(listeBestioles.begin(), listeBestioles.end(), del), listeBestioles.end());
 }
 
 
@@ -127,23 +149,6 @@ int Milieu::randomPerso(){
    }
    return type;
 }
-
-bool changePerso(std::shared_ptr<Bestiole> b){
-   bool result = false;
-   if(b->isPersoMult()){
-      if(std::rand()%6000==0){
-         int type = 1;
-         BestioleFactory factory;
-         std::shared_ptr<Bestiole> best = factory.creationBestiole(true, type, false, false, false, false, false);
-         cout << "changement" << endl;
-         best->clone(b);
-         listeBestioles.push_back(best);
-         result = true;
-      }
-   }
-   return result;
-}
-
 
 void Milieu::naissanceAlea( void ){
 
