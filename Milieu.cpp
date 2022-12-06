@@ -74,8 +74,6 @@ void Milieu::step( void ){
 }
 bool estMorte(std::shared_ptr<Bestiole> b) { b->vieillit(); return (b->getAnneesRestantes() <= 0); }
 
-
-
 void Milieu::phaseEnvironnement( void ){
    // Gestion de l'âge
    // Si la bestiole atteint son âge maximal, elle meurt
@@ -130,6 +128,23 @@ int Milieu::randomPerso(){
    return type;
 }
 
+bool changePerso(std::shared_ptr<Bestiole> b){
+   bool result = false;
+   if(b->isPersoMult()){
+      if(std::rand()%6000==0){
+         int type = 1;
+         BestioleFactory factory;
+         std::shared_ptr<Bestiole> best = factory.creationBestiole(true, type, false, false, false, false, false);
+         cout << "changement" << endl;
+         best->clone(b);
+         listeBestioles.push_back(best);
+         result = true;
+      }
+   }
+   return result;
+}
+
+
 void Milieu::naissanceAlea( void ){
 
    BestioleFactory factory;
@@ -154,13 +169,6 @@ void Milieu::addPersoAlea( void ){
    addMember(best);
 }
 
-void Milieu::clone(std::shared_ptr<Bestiole> b){
-   int type = randomPerso();
-   BestioleFactory factory;
-   std::shared_ptr<Bestiole> best = factory.creationBestiole(true, type, false, false, false, false, false);
-   best->clone(b);
-   addMember(best);
-}
 
 void Milieu::phaseDetection ( void ){
    std::vector<std::shared_ptr<Bestiole>> bestiolesAlentours;
@@ -208,14 +216,3 @@ int Milieu::nbVoisins( const Bestiole & b )
 
 }
 
-bool changePerso(std::shared_ptr<Bestiole> b){
-   bool result = false;
-   if(b->isPersoMult()){
-      if(std::rand()%6000==0){
-         cout << "changement" << endl;
-         clone(b);
-         result = true;
-      }
-   }
-   return result;
-}

@@ -45,12 +45,12 @@ public :
    void phaseDetection( void );
    void naissanceAlea( void );
    void addPersoAlea( void ); 
-   void clone(std::shared_ptr<Bestiole> b);
    int randomPerso(void);
+   //bool changePerso(std::shared_ptr<Bestiole> b);
 
    void readConfig( void );
 
-   void addMember(std::shared_ptr<Bestiole> b ) { std::cout << listeBestioles.size() << std::endl; listeBestioles.push_back(b); listeBestioles.back()->initCoords(width, height); }
+   void addMember(std::shared_ptr<Bestiole> b ) { listeBestioles.push_back(b); listeBestioles.back()->initCoords(width, height); }
    int nbVoisins( const Bestiole & b );
 
 };
