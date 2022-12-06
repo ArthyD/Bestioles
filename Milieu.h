@@ -45,6 +45,7 @@ public :
    void phaseDetection( void );
    void naissanceAlea( void );
    void addPersoAlea( void ); 
+   void clone(std::shared_ptr<Bestiole> b);
    int randomPerso(void);
 
    void readConfig( void );

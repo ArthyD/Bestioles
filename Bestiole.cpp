@@ -185,10 +185,11 @@ bool operator==( const Bestiole & b1, const Bestiole & b2 )
 // }
 bool Bestiole::jeTeVois( const Bestiole & b ) const{
    double dist;
+   double dotproduct;
    double angleEntreBestioles;
-   double alpha;
    dist = std::sqrt( (x-b.x)*(x-b.x) + (y-b.y)*(y-b.y) );
-
+   vector<double> vecteurBestiole;
+   vector<double> vecteurEntreBestioles;
    if (capaciteOeil<=b.coeffCamouflage){
       if (capaciteOreille<=b.coeffCamouflage){
          return (false);
@@ -206,23 +207,19 @@ bool Bestiole::jeTeVois( const Bestiole & b ) const{
       } else if (distanceOeil<dist){
          return (false);
       } else {
-         if ((b.x-x)>=0){
-            if ((b.y-y)>=0){
-               alpha = atan((b.y-y)/(b.x-x));
-            } else {
-            alpha = atan((b.y-y)/(b.x-x)) + 2*M_PI;
-            }
-         } else {
-            if ((b.y-y)>=0){
-               alpha = M_PI_2 + atan((b.y-y)/(b.x-x));
-            } else {
-            alpha = M_PI + atan((b.y-y)/(b.x-x));
-            }
+         vecteurBestiole.push_back(cos(orientation));
+         vecteurBestiole.push_back(sin(orientation));
+         vecteurEntreBestioles.push_back((b.x-x)/dist);
+         vecteurEntreBestioles.push_back((b.y-y)/dist);
+         for(int i=0;i<vecteurBestiole.size();i++){
+            dotproduct += vecteurBestiole[i] * vecteurEntreBestioles[i];
          }
-         angleEntreBestioles = abs(orientation - alpha);
-         if (angleEntreBestioles<(champOeil/2)){
-            return true;
-            cout << "je vois"<<endl;
+         if (dotproduct<0){
+            dotproduct+=1;
+         }
+         angleEntreBestioles = acos(dotproduct);
+         if (angleEntreBestioles<=champOeil/2){
+            return(true);
          } else {
             return false;
          }
