@@ -12,6 +12,9 @@ BestiolePeureuse::~BestiolePeureuse(void)
 
 }
 
+// Fonction : BestiolePeureuse
+// Entrée : les attributs de la bestiole
+// Action : Constructeur de la bestiole
 BestiolePeureuse::BestiolePeureuse(bool pM, double t, int a, double champo, double disto, double distOr, double capaOeil, double capaOreille, double coeffCamou, double coeffCarap, double coeffDebuffCarap, double coeffNag){
     identite = ++next;
    cout << "Naissance Bestiole (" << identite << ") " << endl;

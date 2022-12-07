@@ -71,15 +71,19 @@ public :                                           // Forme canonique :
    friend bool operator==( const Bestiole & b1, const Bestiole & b2 );
 
    virtual void update(std::vector<std::shared_ptr<Bestiole>>& vectorBestioleProche) {std::cout<< "Mauvais update" << std::endl;};
+   void vieillit();
+
    void rebondit();
    bool checkCollision(std::shared_ptr<Bestiole> b);
    bool collision();
+   
    std::shared_ptr<Bestiole> clone();
    void cloneFromBestiole(std::shared_ptr<Bestiole> b);
+   
+   // Les getters
    bool hasOeil();
    bool hasOreille();
    bool isPersoMult();
-   void vieillit();
    int getX();
    int getY();
    double getOrientation();
@@ -87,11 +91,13 @@ public :                                           // Forme canonique :
    int getIdentite();
    int getAnneesRestantes();
    int getTaille();
-   void deleteBestiole();
+   
    bool isDeletedSoon();
 
+   // Les setters
    void setOrientation(double o);
    void setVitesse(double v);
+   void deleteBestiole();
 };
 
 

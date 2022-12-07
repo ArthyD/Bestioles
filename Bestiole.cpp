@@ -13,10 +13,12 @@ const double      Bestiole::LIMITE_VUE = 50.;
 
 int               Bestiole::next = 0;
 
+ /*********** Constructeurs et destructeurs **********/
 
-Bestiole::Bestiole( void )
-{
-
+// Fonction : Bestiole
+// Entrée : rien
+// Action : Constructeur de la bestiole
+Bestiole::Bestiole( void ){
    identite = ++next;
 
    //cout << "const Bestiole (" << identite << ") par defaut" << endl;
@@ -46,14 +48,11 @@ Bestiole::Bestiole( void )
    coeffNageoire = 1;
 }
 
-
-Bestiole::Bestiole( const Bestiole & b )
-{
-
+// Fonction : Bestiole
+// Entrée : une bestiole
+// Action : Constructeur de la bestiole
+Bestiole::Bestiole( const Bestiole & b ){
    identite = ++next;
-
-   //cout << "const Bestiole (" << identite << ") par copie" << endl;
-
    x = b.x;
    y = b.y;
    cumulX = cumulY = 0.;
@@ -61,10 +60,16 @@ Bestiole::Bestiole( const Bestiole & b )
    vitesse = b.vitesse;
    couleur = new T[ 3 ];
    memcpy( couleur, b.couleur, 3*sizeof(T) );
-
 }
 
+// Fonction : Bestiole
+// Entrée : les attributs de la bestiole
+// Action : Constructeur de la bestiole
+Bestiole::Bestiole(bool pM, double t, int a, double champo, double disto, double distOr, double capaOeil, double capaOreille, double coeffCamou, double coeffCarap, double coeffDebuffCarap, double coeffNag){} 
 
+// Fonction : ~Bestiole
+// Entrée : les attributs de la bestiole
+// Action : le destructeur
 Bestiole::~Bestiole( void )
 {
 
@@ -74,115 +79,13 @@ Bestiole::~Bestiole( void )
 
 }
 
-Bestiole::Bestiole(bool pM, double t, int a, double champo, double disto, double distOr, double capaOeil, double capaOreille, double coeffCamou, double coeffCarap, double coeffDebuffCarap, double coeffNag){
-   
-   identite = ++next;
-   cout << "Naissance Bestiole (" << identite << ") " << endl;
+ /*********** Visions et mise à jour des attributs **********/
 
-   x = y = 0;
-   cumulX = cumulY = 0.;
-   orientation = static_cast<double>( rand() )/RAND_MAX*2.*M_PI;
-   vitesse = static_cast<double>( rand() )/RAND_MAX*MAX_VITESSE * (coeffNageoire / coeffDebuffCarapace);
-
-   couleur = new T[ 3 ];
-   couleur[ 0 ] = static_cast<int>( static_cast<double>( rand() )/RAND_MAX*230. );
-   couleur[ 1 ] = static_cast<int>( static_cast<double>( rand() )/RAND_MAX*230. );
-   couleur[ 2 ] = static_cast<int>( static_cast<double>( rand() )/RAND_MAX*230. );
-
-   persoMult = pM;
-   taille = t;
-   anneesRestantes = a;
-   std::cout << "age " << a << "et années restantes " << anneesRestantes << std::endl;
-
-   champOeil = champo;
-   champOreille = 2*M_PI;
-   distanceOeil = disto;
-   distanceOreille = distOr;
-   capaciteOeil = capaOeil;
-   capaciteOreille = capaOreille;
-   coeffCamouflage = coeffCamou;
-   coeffCarapace = coeffCarap;
-   coeffDebuffCarapace = coeffDebuffCarap;
-   coeffNageoire = coeffNag;
-    
-} 
-
-void Bestiole::initCoords( int xLim, int yLim )
-{
-
-   x = rand() % xLim;
-   y = rand() % yLim;
-
-}
-
-
-void Bestiole::bouge( int xLim, int yLim )
-{
-
-   double         nx, ny;
-   double         dx = cos( orientation )*vitesse;
-   double         dy = -sin( orientation )*vitesse;
-   int            cx, cy;
-
-
-   cx = static_cast<int>( cumulX ); cumulX -= cx;
-   cy = static_cast<int>( cumulY ); cumulY -= cy;
-
-   nx = x + dx + cx;
-   ny = y + dy + cy;
-
-   if ( (nx < 0) || (nx > xLim - 1) ) {
-      orientation = M_PI - orientation;
-      cumulX = 0.;
-   }
-   else {
-      x = static_cast<int>( nx );
-      cumulX += nx - x;
-   }
-
-   if ( (ny < 0) || (ny > yLim - 1) ) {
-      orientation = -orientation;
-      cumulY = 0.;
-   }
-   else {
-      y = static_cast<int>( ny );
-      cumulY += ny - y;
-   }
-
-}
-
-
-void Bestiole::action(Milieu & monMilieu)
-{
-
-   bouge( monMilieu.getWidth(), monMilieu.getHeight() );
-
-}
-
-
-void Bestiole::draw( UImg & support )
-{
-
-   double         xt = x + cos( orientation )*AFF_SIZE/2.1;
-   double         yt = y - sin( orientation )*AFF_SIZE/2.1;
-
-
-   support.draw_ellipse( x, y, AFF_SIZE, AFF_SIZE/5., -orientation/M_PI*180., couleur );
-   support.draw_circle( xt, yt, AFF_SIZE/2., couleur );
-
-}
-
-
-bool operator==( const Bestiole & b1, const Bestiole & b2 )
-{
-
-   return ( b1.identite == b2.identite );
-
-}
-
-// bool Bestiole::jeTeVois(const Bestiole  & b) const{
-//    return false;
-// }
+// Fonction : jeTeVois
+// Entrée : Une bestiole
+// Sortie : Un booléen
+// Action : Détermine si une bestiole est vue par la bestiole
+// (prend en compte capteurs et accessoires).
 bool Bestiole::jeTeVois( const Bestiole & b ) const{
    double dist;
    double dotproduct;
@@ -227,12 +130,11 @@ bool Bestiole::jeTeVois( const Bestiole & b ) const{
    }
 }
 
-void Bestiole::rebondit()
-{
+void Bestiole::rebondit(){
    vitesse*=-1;
 }
 
-// Fonction : chechCollision
+// Fonction : checkCollision
 // Entrée : Deux bestioles
 // Sortie : Booléen
 // Action : Détermine si deux bestioles se touchent
@@ -261,7 +163,12 @@ bool Bestiole::collision(){
    return (probaMort > 0.5);
 }
 
+ /*********** Clonage **********/
 
+// Fonction : clone
+// Entrée : rien
+// Sortie : Un pointeur vers une bestiole
+// Action : clone la bestiole
 std::shared_ptr<Bestiole> Bestiole::clone()
 {
    std::shared_ptr<Bestiole> clone {new Bestiole()};
@@ -289,7 +196,10 @@ std::shared_ptr<Bestiole> Bestiole::clone()
    return clone;
 } 
 
-// Ici on prend tout les arguments de la bestiole donnée en entrée
+// Fonction : cloneFromBestiole
+// Entrée : Une bestiole
+// Sortie : rien
+// Action : on récupère tout les attributs de la bestiole en entrée
 void Bestiole::cloneFromBestiole(std::shared_ptr<Bestiole> bestiolePrototype)
 {
    next=bestiolePrototype->next;
@@ -315,14 +225,12 @@ void Bestiole::cloneFromBestiole(std::shared_ptr<Bestiole> bestiolePrototype)
    coeffDebuffCarapace=bestiolePrototype->coeffDebuffCarapace;
    coeffNageoire=bestiolePrototype->coeffNageoire;
 } 
-
-bool Bestiole::hasOreille()
-{
+ /*********** Getters and setters **********/
+bool Bestiole::hasOreille(){
    return capaciteOreille!=0;
 }
 
-bool Bestiole::hasOeil()
-{
+bool Bestiole::hasOeil(){
    return capaciteOeil!=0;
 }
 
@@ -330,49 +238,41 @@ bool Bestiole::isPersoMult(){
    return persoMult;
 }
 
-void Bestiole::vieillit()
-{
+void Bestiole::vieillit(){
    anneesRestantes = anneesRestantes - 1;
 }
 
-int Bestiole::getX()
-{
+int Bestiole::getX(){
    return x;
 }
 
-int Bestiole::getY()
-{
+int Bestiole::getY(){
    return y;
 }
 
-double Bestiole::getOrientation()
-{
+double Bestiole::getOrientation(){
    return orientation;
 }
 
-double Bestiole::getVitesse()
-{
+double Bestiole::getVitesse(){
    return vitesse;
 }
-int Bestiole::getIdentite()
-{
+int Bestiole::getIdentite(){
    return identite;
 }
 
-int Bestiole::getAnneesRestantes()
-{
+int Bestiole::getAnneesRestantes(){
    return anneesRestantes;
 }
-int Bestiole::getTaille()
-{
+
+int Bestiole::getTaille(){
    return taille;
 }
-void Bestiole::setVitesse(double v)
-{
+void Bestiole::setVitesse(double v){
    vitesse = v;
 }
-void Bestiole::setOrientation(double o)
-{
+
+void Bestiole::setOrientation(double o){
    orientation = o;
 }
 
@@ -382,4 +282,66 @@ void Bestiole::deleteBestiole(){
 
 bool Bestiole::isDeletedSoon(){
    return hasToBeDeleted;
+}
+
+
+void Bestiole::draw( UImg & support )
+{
+   double         xt = x + cos( orientation )*AFF_SIZE/2.1;
+   double         yt = y - sin( orientation )*AFF_SIZE/2.1;
+
+
+   support.draw_ellipse( x, y, AFF_SIZE, AFF_SIZE/5., -orientation/M_PI*180., couleur );
+   support.draw_circle( xt, yt, AFF_SIZE/2., couleur );
+}
+
+ /*********** Déplacements **********/
+void Bestiole::initCoords( int xLim, int yLim )
+{
+
+   x = rand() % xLim;
+   y = rand() % yLim;
+
+}
+
+void Bestiole::bouge( int xLim, int yLim ){
+
+   double         nx, ny;
+   double         dx = cos( orientation )*vitesse;
+   double         dy = -sin( orientation )*vitesse;
+   int            cx, cy;
+
+
+   cx = static_cast<int>( cumulX ); cumulX -= cx;
+   cy = static_cast<int>( cumulY ); cumulY -= cy;
+
+   nx = x + dx + cx;
+   ny = y + dy + cy;
+
+   if ( (nx < 0) || (nx > xLim - 1) ) {
+      orientation = M_PI - orientation;
+      cumulX = 0.;
+   }
+   else {
+      x = static_cast<int>( nx );
+      cumulX += nx - x;
+   }
+
+   if ( (ny < 0) || (ny > yLim - 1) ) {
+      orientation = -orientation;
+      cumulY = 0.;
+   }
+   else {
+      y = static_cast<int>( ny );
+      cumulY += ny - y;
+   }
+
+}
+
+void Bestiole::action(Milieu & monMilieu){
+   bouge( monMilieu.getWidth(), monMilieu.getHeight() );
+}
+
+bool operator==( const Bestiole & b1, const Bestiole & b2 ){
+   return ( b1.identite == b2.identite );
 }

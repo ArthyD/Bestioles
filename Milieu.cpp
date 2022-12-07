@@ -10,7 +10,7 @@
 
 const T    Milieu::white[] = { (T)255, (T)255, (T)255 };
 
-
+ /*********** Constructeurs et destructeurs **********/
 Milieu::Milieu( int _width, int _height ) : UImg( _width, _height, 1, 3 ),
                                             width(_width), height(_height)
 {
@@ -27,6 +27,12 @@ Milieu::~Milieu( void )
    cout << "dest Milieu" << endl;
 }
 
+ /*********** Initialisation **********/
+
+// Fonction : readConfig
+// Entrée : rien
+// Sortie : rien
+// Action : lit le fichier de configuration et initialise les paramètres de la simulation
 void Milieu::readConfig(void)
 {
    ifstream fichier("./config.txt", ios::in);
@@ -64,6 +70,12 @@ void Milieu::readConfig(void)
    fichier.close();
 }
 
+ /*********** Actions **********/
+
+ // Fonction : step
+// Entrée : rien
+// Sortie : rien
+// Action : une étape de simulation
 void Milieu::step( void ){
    
    phaseDetection();
@@ -75,6 +87,12 @@ void Milieu::step( void ){
 bool del(std::shared_ptr<Bestiole> b){return b->isDeletedSoon();}
 //bool estMorte(std::shared_ptr<Bestiole> b) { b->vieillit(); return (b->getAnneesRestantes() <= 0); }
 
+/* Fonction : phaseEnvironnement
+* Entrée : rien
+* Sortie : rien
+* Action : vérifie les âges des bestioles, les collisions
+* élimine les bestioles qui doivent mourir
+*/
 void Milieu::phaseEnvironnement( void ){
    // Gestion de l'âge
    // Si la bestiole atteint son âge maximal, elle meurt
@@ -93,6 +111,7 @@ void Milieu::phaseEnvironnement( void ){
       for ( std::list<std::shared_ptr<Bestiole>>::iterator it2 = listeBestioles.begin() ; 
             it2 != it1 ; it2++ ){
          if ((*it2)->checkCollision((*it1))){
+            cout << "boom" << endl;
             collisions.push_back(*it1);
             collisions.push_back(*it2);
          }
@@ -129,7 +148,55 @@ void Milieu::phaseEnvironnement( void ){
    listeBestioles.erase(std::remove_if(listeBestioles.begin(), listeBestioles.end(), del), listeBestioles.end());
 }
 
+/* Fonction : phaseDetection
+* Entrée : rien
+* Sortie : rien
+* Action : vérifie les bestioles qui se voient entre elles
+* change leurs attributs selon leur comportement
+*/
+void Milieu::phaseDetection ( void ){
+   std::vector<std::shared_ptr<Bestiole>> bestiolesAlentours;
+   for ( std::list<std::shared_ptr<Bestiole>>::iterator it1 = listeBestioles.begin() ; it1 != listeBestioles.end() ; it1++ )
+   {
+      for ( std::list<std::shared_ptr<Bestiole>>::iterator it2 = listeBestioles.begin() ; it2 != listeBestioles.end() ; it2++ )
+      {
+         if ((*it1)->getIdentite() != (*it2)->getIdentite()) {
+            if ( (*it1)->jeTeVois(**it2) ) 
+            {
+               bestiolesAlentours.push_back(*it2);
+            }
+            (*it1)->update(bestiolesAlentours);
+         }
+      }
+      bestiolesAlentours.clear();
+      }
+}
 
+/* Fonction : phaseAction
+* Entrée : rien
+* Sortie : rien
+* Action : Déplace les bestioles
+*/
+void Milieu::phaseAction( void )
+{
+
+   cimg_forXY( *this, x, y ) fillC( x, y, 0, white[0], white[1], white[2] );
+   for ( std::list<std::shared_ptr<Bestiole>>::iterator it = listeBestioles.begin() ; it != listeBestioles.end() ; ++it )
+   {
+      (*it)->action( *this );
+      (*it)->draw( *this );
+
+   } 
+
+}
+
+ /*********** Autres méthodes **********/
+
+/* Fonction : randomPerso
+* Entrée : rien
+* Sortie : un entier
+* Action : tire un type aléatoir de bestiole en respectant la config
+*/
 int Milieu::randomPerso(){
    double tirageAlea = static_cast<double>( std::rand()/RAND_MAX);
    int type = 1;
@@ -150,6 +217,11 @@ int Milieu::randomPerso(){
    return type;
 }
 
+/* Fonction : naissanceAlea
+* Entrée : rien
+* Sortie : rien
+* Action : fait naître une bestiole aléatoirement
+*/
 void Milieu::naissanceAlea( void ){
 
    BestioleFactory factory;
@@ -160,6 +232,11 @@ void Milieu::naissanceAlea( void ){
    }
 }
 
+/* Fonction : addPersoAlea
+* Entrée : rien
+* Sortie : rien
+* Action : crée et ajoute une bestiole aléatoire
+*/
 void Milieu::addPersoAlea( void ){
    BestioleFactory factory;
    bool persoMult,aOreille,aYeux,aCamouflage,aCarapace,aNageoires;
@@ -174,39 +251,11 @@ void Milieu::addPersoAlea( void ){
    addMember(best);
 }
 
-
-void Milieu::phaseDetection ( void ){
-   std::vector<std::shared_ptr<Bestiole>> bestiolesAlentours;
-   for ( std::list<std::shared_ptr<Bestiole>>::iterator it1 = listeBestioles.begin() ; it1 != listeBestioles.end() ; it1++ )
-   {
-      for ( std::list<std::shared_ptr<Bestiole>>::iterator it2 = listeBestioles.begin() ; it2 != listeBestioles.end() ; it2++ )
-      {
-         if ((*it1)->getIdentite() != (*it2)->getIdentite()) {
-            if ( (*it1)->jeTeVois(**it2) ) 
-            {
-               bestiolesAlentours.push_back(*it2);
-            }
-            (*it1)->update(bestiolesAlentours);
-         }
-      }
-      bestiolesAlentours.clear();
-      }
-}
-
-void Milieu::phaseAction( void )
-{
-
-   cimg_forXY( *this, x, y ) fillC( x, y, 0, white[0], white[1], white[2] );
-   for ( std::list<std::shared_ptr<Bestiole>>::iterator it = listeBestioles.begin() ; it != listeBestioles.end() ; ++it )
-   {
-      (*it)->action( *this );
-      (*it)->draw( *this );
-
-   } 
-
-}
-
-
+/* Fonction : nbVoisins
+* Entrée : une bestiole
+* Sortie : int
+* Action : donne le nombre de voisins d'une bestiole
+*/
 int Milieu::nbVoisins( const Bestiole & b )
 {
 

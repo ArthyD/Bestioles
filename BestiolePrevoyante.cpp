@@ -3,6 +3,9 @@
 
 BestiolePrevoyante::BestiolePrevoyante(void){}
 
+// Fonction : BestiolePrevoyante
+// Entrée : les attributs de la bestiole
+// Action : Constructeur de la bestiole
 BestiolePrevoyante::BestiolePrevoyante(bool pM, double t, int a, double champo, double disto, double distOr, double capaOeil, double capaOreille, double coeffCamou, double coeffCarap, double coeffDebuffCarap, double coeffNag){
         identite = ++next;
    cout << "Naissance Bestiole (" << identite << ") " << endl;
