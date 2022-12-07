@@ -112,20 +112,20 @@ void Milieu::phaseEnvironnement( void ){
 
 
    // Changement de personalité des personalités multiples
-   for ( std::list<std::shared_ptr<Bestiole>>::iterator it = listeBestioles.begin() ; 
-         it != listeBestioles.end() ; it++ ){
-      if((*it)->isPersoMult()){
-         if(std::rand()%60==0){
-            int type = randomPerso();
-            BestioleFactory factory;
-            std::shared_ptr<Bestiole> best = factory.creationBestiole(true, type, false, false, false, false, false);
-            cout << "changement" << endl;
-            best->cloneFromBestiole(*it);
-            addMember(best);
-            (*it)->deleteBestiole();   
-         }
-      }
-   }
+   // for ( std::list<std::shared_ptr<Bestiole>>::iterator it = listeBestioles.begin() ; 
+   //       it != listeBestioles.end() ; it++ ){
+   //    if((*it)->isPersoMult()){
+   //       if(std::rand()%60==0){
+   //          int type = randomPerso();
+   //          BestioleFactory factory;
+   //          std::shared_ptr<Bestiole> best = factory.creationBestiole(true, type, false, false, false, false, false);
+   //          cout << "changement" << endl;
+   //          best->cloneFromBestiole(*it);
+   //          addMember(best);
+   //          (*it)->deleteBestiole();   
+   //       }
+   //    }
+   // }
    listeBestioles.erase(std::remove_if(listeBestioles.begin(), listeBestioles.end(), del), listeBestioles.end());
 }
 

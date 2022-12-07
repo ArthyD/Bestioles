@@ -29,7 +29,7 @@ BestioleFactory::~BestioleFactory()
 
 
 double BestioleFactory::randomDouble(double min, double max) {
-    return static_cast<double>( rand() )/RAND_MAX*max;
+    return min +  static_cast<double>( rand() )/RAND_MAX*max;
 }
 void BestioleFactory::readConfig(void)
 {
