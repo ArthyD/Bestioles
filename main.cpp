@@ -18,7 +18,7 @@ int main()
             std::string ligne;
             std::string champ;
             double valeur;
-            for (int i =0;  i < 25; i++)
+            for (int i =0;  i < 30; i++)
         {
             getline(fichier, ligne);
             std::size_t pos = ligne.find("=");
@@ -31,7 +31,7 @@ int main()
    }
    Aquarium       ecosysteme( 640, 480, 30 );
 
-   for (int i = 0; i<=nombreBestioles; i++){
+   for (int i = 0; i<=nombreBestioles - 1; i++){
       ecosysteme.getMilieu().addPersoAlea();
    }
 

@@ -41,7 +41,7 @@ void Milieu::readConfig(void)
             std::string ligne;
             std::string champ;
             double valeur;
-            for (int i =0;  i < 5; i++)
+            for (int i =0;  i < 10; i++)
         {
             getline(fichier, ligne);
             std::size_t pos = ligne.find("=");
@@ -62,6 +62,9 @@ void Milieu::readConfig(void)
             if (champ == "Pourcentage Prevoyante") {
              pourcentagePrevoyante = valeur;
             }
+            if (champ == "Probabilité de naissance spontanée") {
+             probaNaissance = valeur;
+            }
         }
    }
    else {
@@ -81,7 +84,7 @@ void Milieu::step( void ){
    phaseDetection();
    phaseAction();
    phaseEnvironnement();
-   //naissanceAlea();
+   naissanceAlea();
 
 }
 bool del(std::shared_ptr<Bestiole> b){return b->isDeletedSoon();}
@@ -225,7 +228,7 @@ int Milieu::randomPerso(){
 void Milieu::naissanceAlea( void ){
 
    BestioleFactory factory;
-   double tirageAlea = static_cast<double>( std::rand()/RAND_MAX);
+   double tirageAlea = ((double) std::rand())/ (double) RAND_MAX;
    if (tirageAlea < probaNaissance)
    {
       addPersoAlea();
