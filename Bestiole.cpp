@@ -75,7 +75,7 @@ Bestiole::~Bestiole( void )
 
    delete[] couleur;
 
-   cout << "dest Bestiole" << endl;
+   cout << "dest Bestiole " << this << endl;
 
 }
 
@@ -171,8 +171,9 @@ bool Bestiole::collision(){
 // Action : clone la bestiole
 std::shared_ptr<Bestiole> Bestiole::clone()
 {
-   std::shared_ptr<Bestiole> clone {new Bestiole()};
+   std::shared_ptr<Bestiole> clone = make_shared<Bestiole>();
    clone->next=next;
+   clone->identite=identite;
    clone->x=x;
    clone->y=y;
    clone->cumulX=cumulX;
@@ -200,7 +201,7 @@ std::shared_ptr<Bestiole> Bestiole::clone()
 // Entrée : Une bestiole
 // Sortie : rien
 // Action : on récupère tout les attributs de la bestiole en entrée
-void Bestiole::cloneFromBestiole(std::shared_ptr<Bestiole> bestiolePrototype)
+void Bestiole::cloneFromBestiole(std::shared_ptr<Bestiole>& bestiolePrototype)
 {
    next=bestiolePrototype->next;
    identite=bestiolePrototype->identite;
@@ -225,6 +226,7 @@ void Bestiole::cloneFromBestiole(std::shared_ptr<Bestiole> bestiolePrototype)
    coeffDebuffCarapace=bestiolePrototype->coeffDebuffCarapace;
    coeffNageoire=bestiolePrototype->coeffNageoire;
 } 
+
  /*********** Getters and setters **********/
 bool Bestiole::hasOreille(){
    return capaciteOreille!=0;

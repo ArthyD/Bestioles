@@ -155,18 +155,18 @@ std::shared_ptr<Bestiole> BestioleFactory::creationBestiole(bool persoMult, int 
     double taille = randomDouble(1.0,taillemax);
     //création de la bestiole choisie via le type
     if (type==1){
-        return std::shared_ptr<Bestiole>(new BestioleKamikaze(persoMult, taille, age, champOeil, distanceOeil, distanceOreille, capaciteOeil, capaciteOreille, coeffCamouflage, coeffCarapace, coeffDebuffCarapace, coeffNageoire));
+        return std::make_shared<BestioleKamikaze>(persoMult, taille, age, champOeil, distanceOeil, distanceOreille, capaciteOeil, capaciteOreille, coeffCamouflage, coeffCarapace, coeffDebuffCarapace, coeffNageoire);
     } 
     if (type ==2){
-        return std::shared_ptr<Bestiole>(new BestioleGregaire(persoMult, taille, age, champOeil, distanceOeil, distanceOreille, capaciteOeil, capaciteOreille, coeffCamouflage, coeffCarapace, coeffDebuffCarapace, coeffNageoire));
+        return std::make_shared<BestioleGregaire>(persoMult, taille, age, champOeil, distanceOeil, distanceOreille, capaciteOeil, capaciteOreille, coeffCamouflage, coeffCarapace, coeffDebuffCarapace, coeffNageoire);
     } 
     else if (type ==3){
-        return std::shared_ptr<Bestiole>(new BestiolePrevoyante(persoMult, taille, age, champOeil, distanceOeil, distanceOreille, capaciteOeil, capaciteOreille, coeffCamouflage, coeffCarapace, coeffDebuffCarapace, coeffNageoire));
+        return std::make_shared<BestiolePrevoyante>(persoMult, taille, age, champOeil, distanceOeil, distanceOreille, capaciteOeil, capaciteOreille, coeffCamouflage, coeffCarapace, coeffDebuffCarapace, coeffNageoire);
     } 
     if (type ==4) {
         int agoraphobie = agoraMin + rand() % (agoraMax - agoraMin +1);
-        std::shared_ptr<Bestiole> b {new BestiolePeureuse(persoMult, taille, age, champOeil, distanceOeil, distanceOreille, capaciteOeil, capaciteOreille, coeffCamouflage, coeffCarapace, coeffDebuffCarapace, coeffNageoire)} ;
-        std::dynamic_pointer_cast<BestiolePeureuse>(b)->setAgoraphobie(agoraphobie);
+        auto b = std::make_shared<BestiolePeureuse>(persoMult, taille, age, champOeil, distanceOeil, distanceOreille, capaciteOeil, capaciteOreille, coeffCamouflage, coeffCarapace, coeffDebuffCarapace, coeffNageoire) ;
+        b->setAgoraphobie(agoraphobie);
         return b;
     } else {
         return NULL;
