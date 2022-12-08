@@ -80,8 +80,11 @@ void Milieu::readConfig(void)
 // Sortie : rien
 // Action : une étape de simulation
 void Milieu::step( void ){
-   
+   compteur += 1;
+   if (compteur == 7){
    phaseDetection();
+   compteur = 0;
+   }
    phaseAction();
    phaseEnvironnement();
    naissanceAlea();
@@ -119,7 +122,6 @@ void Milieu::phaseEnvironnement( void ){
       for ( std::list<std::shared_ptr<Bestiole>>::iterator it2 = listeBestioles.begin() ; 
             it2 != it1 ; it2++ ){
          if ((*it2)->checkCollision((*it1))){
-            cout << "boom" << endl;
             collisions.push_back(*it1);
             collisions.push_back(*it2);
          }
@@ -138,20 +140,20 @@ void Milieu::phaseEnvironnement( void ){
          }
 
 
-   // Changement de personalité des personalités multiples
-   for ( std::list<std::shared_ptr<Bestiole>>::iterator it = listeBestioles.begin() ; 
-         it != listeBestioles.end() ; it++ ){
-      if((*it)->isPersoMult()){
-         if(std::rand()%60==0){
-            BestioleFactory factory;
-            int type = randomPerso();
-            std::shared_ptr<Bestiole> best = factory.creationBestiole(true, type, false, false, false, false, false);
-            //best->cloneFromBestiole(*it);
-            (*it)->deleteBestiole(); 
-            addMember(best);
-         }
-      }
-   }
+   // // Changement de personalité des personalités multiples
+   // for ( std::list<std::shared_ptr<Bestiole>>::iterator it = listeBestioles.begin() ; 
+   //       it != listeBestioles.end() ; it++ ){
+   //    if((*it)->isPersoMult()){
+   //       if(std::rand()%60==0){
+   //          BestioleFactory factory;
+   //          int type = randomPerso();
+   //          std::shared_ptr<Bestiole> best = factory.creationBestiole(true, type, false, false, false, false, false);
+   //          //best->cloneFromBestiole(*it);
+   //          (*it)->deleteBestiole(); 
+   //          addMember(best);
+   //       }
+   //    }
+   // }
 
 
    listeBestioles.erase(std::remove_if(listeBestioles.begin(), listeBestioles.end(), del), listeBestioles.end());

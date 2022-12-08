@@ -30,6 +30,8 @@ private :
    double                    pourcentagePersoMulti =  0.0;
 
    double                    probaNaissance = 0.0001;
+
+   int compteur = 0;
    
 
 public :
