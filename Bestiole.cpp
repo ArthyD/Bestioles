@@ -131,7 +131,12 @@ bool Bestiole::jeTeVois( const Bestiole & b ) const{
 }
 
 void Bestiole::rebondit(){
-   vitesse*=-1;
+   double pi = M_PI;
+   if (orientation < pi){
+            orientation += pi;
+        } else {
+            orientation -= pi;
+        }
 }
 
 // Fonction : checkCollision
@@ -146,7 +151,6 @@ bool Bestiole::checkCollision(std::shared_ptr<Bestiole> bestiole2){
    int y2 = (*bestiole2).getY();
    int taille1 = this->taille;
    int taille2 = (*bestiole2).getTaille();
-
    int distanceCarre = (x2-x1)*(x2-x1) + (y2-y1)*(y2-y1);
    return (distanceCarre < ((((taille1)/2) + ((taille2)/2))*(((taille1)/2) + ((taille2)/2))));
 }
