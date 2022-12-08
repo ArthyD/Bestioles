@@ -152,7 +152,7 @@ bool Bestiole::checkCollision(std::shared_ptr<Bestiole> bestiole2){
    int taille1 = this->taille;
    int taille2 = (*bestiole2).getTaille();
    int distanceCarre = (x2-x1)*(x2-x1) + (y2-y1)*(y2-y1);
-   return (distanceCarre < ((((taille1)/2) + ((taille2)/2))*(((taille1)/2) + ((taille2)/2))));
+   return (distanceCarre < (taille1)/2 + (taille2)/2);
 }
 
 // Fonction : collision
@@ -163,7 +163,8 @@ bool Bestiole::checkCollision(std::shared_ptr<Bestiole> bestiole2){
 // Si la bestiole ne meurt pas, elle rebondie.
 bool Bestiole::collision(){
    double carap = this->coeffCarapace;
-   double probaMort = (std::rand()/RAND_MAX)/carap;
+   double probaMort = (((double) std::rand())/ (double) RAND_MAX)/carap;
+   cout << "proba de mourir " << probaMort << endl;
    return (probaMort > 0.5);
 }
 

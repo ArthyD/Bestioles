@@ -122,7 +122,7 @@ void Milieu::phaseEnvironnement( void ){
       for ( std::list<std::shared_ptr<Bestiole>>::iterator it2 = listeBestioles.begin() ; 
             it2 != it1 ; it2++ ){
          if ((*it2)->checkCollision((*it1))){
-            
+            cout << "Boom" << endl;
             collisions.push_back(*it1);
             collisions.push_back(*it2);
          }
@@ -132,7 +132,7 @@ void Milieu::phaseEnvironnement( void ){
    for ( std::vector<std::shared_ptr<Bestiole>>::iterator it1 = collisions.begin() ; 
          it1 != collisions.end() ; it1++ ){
             if((**it1).collision()){
-               cout << "Boom" << endl;
+               
                (*it1)->deleteBestiole();
             }
             else{
