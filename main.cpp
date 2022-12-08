@@ -4,16 +4,34 @@
 #include "BestiolePeureuse.h"
 #include "BestioleFactory.h"
 #include <iostream>
+#include <fstream>
 
 using namespace std;
 
 
 int main()
 {
-
+   int nombreBestioles = 0;
+   ifstream fichier("./config.txt", ios::in);
+   if (fichier)
+   {
+            std::string ligne;
+            std::string champ;
+            double valeur;
+            for (int i =0;  i < 25; i++)
+        {
+            getline(fichier, ligne);
+            std::size_t pos = ligne.find("=");
+            champ = ligne.substr(0,pos);
+            valeur = stoi(ligne.substr(pos+1));
+            if (champ == "Nombre de Bestioles") {
+             nombreBestioles = valeur;
+            }
+        }
+   }
    Aquarium       ecosysteme( 640, 480, 30 );
 
-   for (int i = 0; i<=40; i++){
+   for (int i = 0; i<=nombreBestioles; i++){
       ecosysteme.getMilieu().addPersoAlea();
    }
 
