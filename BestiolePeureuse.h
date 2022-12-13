@@ -16,6 +16,7 @@ class BestiolePeureuse : public Bestiole {
         BestiolePeureuse(void );
         ~BestiolePeureuse(void);
         void setAgoraphobie(int ago);
+        bool getFuite();
 };
 
 #endif

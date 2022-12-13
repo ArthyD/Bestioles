@@ -6,6 +6,7 @@
 #include "BestioleKamikaze.h"
 #include "BestiolePrevoyante.h"
 #include <memory>
+#include <vector>
 
 class BestioleFactory {
     private :
@@ -44,6 +45,9 @@ class BestioleFactory {
         ~BestioleFactory();
         void readConfig(void);
         double randomDouble(double min, double max);
+        //Méthodes utilisées seulement pour les tests
+        vector<double> getParametresD();
+        vector<int> getParametresI();
 };
 
 #endif

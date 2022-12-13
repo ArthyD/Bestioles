@@ -10,7 +10,7 @@ Aquarium::Aquarium( int width, int height, int _delay ) : CImgDisplay(), delay( 
    int         screenHeight = 1024; //screen_height();
 
 
-   cout << "const Aquarium" << endl;
+   cout << "construction d'un Aquarium de taille : " <<width << "x" << height<< " et de delay : " << _delay<< endl;
 
    flotte = new Milieu( width, height );
    assign( *flotte, "Simulation d'ecosysteme" );

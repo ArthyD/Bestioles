@@ -75,3 +75,7 @@ void BestiolePeureuse::update(std::vector<std::shared_ptr<Bestiole>>& vectorBest
         compteur = 1000;
     }
 }
+
+bool BestiolePeureuse::getFuite(){
+    return fuite;
+}

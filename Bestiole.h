@@ -97,6 +97,15 @@ public :                                           // Forme canonique :
    // Les setters
    void setOrientation(double o);
    void setVitesse(double v);
+   void setPosition(int a, int b);
+   void setCapaciteOeil(double o);
+   void setChampOeil(double o);
+   void setDistanceOeil(double o);
+   void setDistanceOreille(double o);
+   void setCapaciteOreille(double o);
+
+
+   //destructeur
    void deleteBestiole();
 };
 

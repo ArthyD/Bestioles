@@ -8,6 +8,7 @@
 #include <cmath>
 
 
+// Nous instantions les paramètres définissant les bestioles
 double distanceOreille = 0;
 double capaciteOreille = 0;
 double champOeil = 0;
@@ -18,6 +19,10 @@ double coeffCarapace = 1; // ???
 double coeffDebuffCarapace = 1;///
 double coeffNageoire = 1;
 
+// Fonction : BestioleFactory
+// Entrée : Rien
+// Action : Construction de la Factory à partir du fichier config.txt pour
+// définir les paramètres des bestioles
 BestioleFactory::BestioleFactory()
 {
     readConfig();
@@ -27,10 +32,16 @@ BestioleFactory::BestioleFactory()
 BestioleFactory::~BestioleFactory()
 {}
 
-
+// Fonction : randomDouble
+// Entrée : Un double minimum et un double maximum qui définissent les bornes des paramètres.
+// Action : Génère un double entre ces bornes pour définir le paramètre lors de la création de Bestiole.
 double BestioleFactory::randomDouble(double min, double max) {
     return min +  static_cast<double>( rand() )/RAND_MAX*max;
 }
+
+// Fonction : readConfig
+// Entrée : void
+// Action : Traite le fichier texte pour définir les bornes des valeurs des paramètres.
 void BestioleFactory::readConfig(void)
 {
 
@@ -110,6 +121,7 @@ void BestioleFactory::readConfig(void)
    }
    fichier.close();
 }
+
 std::shared_ptr<Bestiole> BestioleFactory::creationBestiole(bool persoMult, int type, bool aOreille, bool aYeux, bool aCamouflage, bool aCarapace, bool aNageoires){
     
     if (aOreille){

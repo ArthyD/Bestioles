@@ -283,6 +283,28 @@ void Bestiole::setOrientation(double o){
    orientation = o;
 }
 
+
+void Bestiole::setPosition(int a, int b){
+   x = a;
+   y = b;
+}
+void Bestiole::setCapaciteOeil(double o){
+   capaciteOeil = o;
+}
+
+void Bestiole::setCapaciteOreille(double o){
+   capaciteOreille = o;
+}
+void Bestiole::setChampOeil(double o){
+   champOeil = o;
+}
+void Bestiole::setDistanceOeil(double o){
+   distanceOeil = o;
+}
+void Bestiole::setDistanceOreille(double o){
+   distanceOreille = o;
+}
+
 void Bestiole::deleteBestiole(){
    hasToBeDeleted = true;
 }
