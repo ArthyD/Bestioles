@@ -104,7 +104,8 @@ bool del(std::shared_ptr<Bestiole> b){
 void Milieu::phaseEnvironnement( void ){
    // Gestion de l'âge
    // Si la bestiole atteint son âge maximal, elle meurt
-   //listeBestioles.erase(std::remove_if(listeBestioles.begin(), listeBestioles.end(), estMorte), listeBestioles.end());
+
+   
    for ( std::list<std::shared_ptr<Bestiole>>::iterator it = listeBestioles.begin() ; 
             it != listeBestioles.end() ; it++ ){
          (*it)->vieillit();
@@ -143,7 +144,7 @@ void Milieu::phaseEnvironnement( void ){
          }
 
 
-   // // Changement de personalité des personalités multiples
+   // Changement de personalité des personalités multiples
    // for ( std::list<std::shared_ptr<Bestiole>>::iterator it = listeBestioles.begin() ; 
    //       it != listeBestioles.end() ; it++ ){
    //    if((*it)->isPersoMult())
@@ -153,13 +154,12 @@ void Milieu::phaseEnvironnement( void ){
    //          BestioleFactory factory;
    //          int type = randomPerso();
    //          std::shared_ptr<Bestiole> best = factory.creationBestiole(true, type, false, false, false, false, false);
-   //          //best->cloneFromBestiole(*it);
+   //          best->cloneFromBestiole(*it);
    //          (*it)->deleteBestiole(); 
    //          addMember(best);
    //       }
    //    }
    // }
-
 
    listeBestioles.erase(std::remove_if(listeBestioles.begin(), listeBestioles.end(), del), listeBestioles.end());
 

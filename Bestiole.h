@@ -77,7 +77,7 @@ public :                                           // Forme canonique :
    
    std::shared_ptr<Bestiole> clone();
    void cloneFromBestiole(std::shared_ptr<Bestiole>& bestiolePrototype);
-   
+
    // Les getters
    bool hasOeil();
    bool hasOreille();

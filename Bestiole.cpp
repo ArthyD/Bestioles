@@ -232,7 +232,6 @@ void Bestiole::cloneFromBestiole(std::shared_ptr<Bestiole>& bestiolePrototype)
 } 
 
 
-
  /*********** Getters and setters **********/
 bool Bestiole::hasOreille(){
    return capaciteOreille!=0;
