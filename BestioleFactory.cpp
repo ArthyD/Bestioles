@@ -14,8 +14,8 @@ double champOeil = 0;
 double distanceOeil = 0;
 double capaciteOeil = 0;
 double coeffCamouflage = 0;
-double coeffCarapace = 1; // ???
-double coeffDebuffCarapace = 1;///
+double coeffCarapace = 1; 
+double coeffDebuffCarapace = 1;
 double coeffNageoire = 1;
 
 // Fonction : BestioleFactory
@@ -163,7 +163,7 @@ std::shared_ptr<Bestiole> BestioleFactory::creationBestiole(bool persoMult, int 
     }
     
     int age = rand() % (agemax + 1);
-    double taille = randomDouble(1.0,taillemax);
+    double taille = randomDouble(5.0,taillemax);
     //création de la bestiole choisie via le type
     if (type==1){
         return std::make_shared<BestioleKamikaze>(persoMult, taille, age, champOeil, distanceOeil, distanceOreille, capaciteOeil, capaciteOreille, coeffCamouflage, coeffCarapace, coeffDebuffCarapace, coeffNageoire);

@@ -66,7 +66,8 @@ void Milieu::readConfig(void)
             }
         }
    }
-   else {
+   else 
+   {
       cerr << "Impossible d'ouvrir le fichier de configuration !" << endl;
    }
    fichier.close();
@@ -86,7 +87,8 @@ void Milieu::step( void ){
 
 }
 bool del(std::shared_ptr<Bestiole> b){
-   if(b->isDeletedSoon()){
+   if(b->isDeletedSoon())
+   {
       b= NULL;
       return true;
    }
@@ -106,18 +108,21 @@ void Milieu::phaseEnvironnement( void ){
    for ( std::list<std::shared_ptr<Bestiole>>::iterator it = listeBestioles.begin() ; 
             it != listeBestioles.end() ; it++ ){
          (*it)->vieillit();
-         if((*it)->getAnneesRestantes()<=0){
+         if((*it)->getAnneesRestantes()<=0)
+         {
             (*it)->deleteBestiole();
          }
       }
    //Gestion des collisions
    std::vector<std::shared_ptr<Bestiole>> collisions;
    for ( std::list<std::shared_ptr<Bestiole>>::iterator it1 = listeBestioles.begin() ; 
-         it1 != listeBestioles.end() ; it1++ ){
+         it1 != listeBestioles.end() ; it1++ )
+      {
       for ( std::list<std::shared_ptr<Bestiole>>::iterator it2 = listeBestioles.begin() ; 
-            it2 != it1 ; it2++ ){
-         if ((*it2)->checkCollision((*it1))){
-            cout << "Boom" << endl;
+            it2 != it1 ; it2++ )
+         {
+         if ((*it2)->checkCollision((*it1)))
+         {
             collisions.push_back(*it1);
             collisions.push_back(*it2);
          }
@@ -126,12 +131,12 @@ void Milieu::phaseEnvironnement( void ){
 
    for ( std::vector<std::shared_ptr<Bestiole>>::iterator it1 = collisions.begin() ; 
          it1 != collisions.end() ; it1++ ){
-            if((**it1).collision()){
-               
+            if((**it1).collision())
+            {   
                (*it1)->deleteBestiole();
             }
-            else{
-               cout << "clap" << endl;
+            else
+            {
                (**it1).rebondit();
             }
 
@@ -141,8 +146,10 @@ void Milieu::phaseEnvironnement( void ){
    // // Changement de personalité des personalités multiples
    // for ( std::list<std::shared_ptr<Bestiole>>::iterator it = listeBestioles.begin() ; 
    //       it != listeBestioles.end() ; it++ ){
-   //    if((*it)->isPersoMult()){
-   //       if(std::rand()%60==0){
+   //    if((*it)->isPersoMult())
+   //    {
+   //       if(std::rand()%60==0)
+   //       {
    //          BestioleFactory factory;
    //          int type = randomPerso();
    //          std::shared_ptr<Bestiole> best = factory.creationBestiole(true, type, false, false, false, false, false);
@@ -170,7 +177,8 @@ void Milieu::phaseDetection ( void ){
    {
       for ( std::list<std::shared_ptr<Bestiole>>::iterator it2 = listeBestioles.begin() ; it2 != listeBestioles.end() ; it2++ )
       {
-         if ((*it1)->getIdentite() != (*it2)->getIdentite()) {
+         if ((*it1)->getIdentite() != (*it2)->getIdentite()) 
+         {
             if ( (*it1)->jeTeVois(**it2) ) 
             {
                bestiolesAlentours.push_back(*it2);
@@ -210,7 +218,8 @@ void Milieu::phaseAction( void )
 int Milieu::randomPerso(){
    double tirageAlea = static_cast<double>( std::rand()/RAND_MAX);
    int type = 1;
-   if (tirageAlea < pourcentageGregaire){
+   if (tirageAlea < pourcentageGregaire)
+   {
       type = 2;
    }
    else if (tirageAlea < pourcentageGregaire + pourcentagePeureuse)
@@ -221,7 +230,8 @@ int Milieu::randomPerso(){
    {
       type = 1;
    }
-   else {
+   else 
+   {
       type = 3;
    }
    return type;
@@ -250,7 +260,8 @@ void Milieu::naissanceAlea( void ){
 void Milieu::addPersoAlea( void ){
    BestioleFactory factory;
    bool persoMult,aOreille,aYeux,aCamouflage,aCarapace,aNageoires;
-   persoMult = std::rand()%2;
+   double tirageAlea = ((double) std::rand())/ (double) RAND_MAX;
+   persoMult = tirageAlea < pourcentagePersoMulti;
    aYeux = std::rand()%2;
    aOreille = std::rand()%2;
    aCamouflage = std::rand()%2;
@@ -261,22 +272,5 @@ void Milieu::addPersoAlea( void ){
    addMember(best);
 }
 
-/* Fonction : nbVoisins
-* Entrée : une bestiole
-* Sortie : int
-* Action : donne le nombre de voisins d'une bestiole
-*/
-int Milieu::nbVoisins( const Bestiole & b )
-{
 
-   int         nb = 0;
-
-
-   for ( std::list<std::shared_ptr<Bestiole>>::iterator it = listeBestioles.begin() ; it != listeBestioles.end() ; ++it )
-      if ( !(b == **it) && b.jeTeVois(**it) )
-         ++nb;
-
-   return nb;
-
-}
 

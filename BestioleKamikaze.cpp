@@ -71,7 +71,16 @@ void BestioleKamikaze::update(vector<std::shared_ptr<Bestiole>> & vectorBestiole
 
         deltaX = cibleX - x;
         deltaY = cibleY - y;
-        if (deltaX < 0) {
+        if (deltaX == 0) {
+            if (deltaY >= 0) {
+                orientation = M_PI / 2;
+            }
+            else 
+            {
+                orientation = -M_PI / 2;
+            }
+        }
+        else if (deltaX < 0) {
             orientation = M_PI + atan(deltaY / deltaX);
         }
         else if (deltaY >= 0) {

@@ -7,9 +7,7 @@
 #include <memory>
 
 
-const double      Bestiole::AFF_SIZE = 8.;
 const double      Bestiole::MAX_VITESSE = 10.;
-const double      Bestiole::LIMITE_VUE = 50.;
 
 int               Bestiole::next = 0;
 
@@ -154,7 +152,7 @@ bool Bestiole::checkCollision(std::shared_ptr<Bestiole> bestiole2){
    int taille1 = this->taille;
    int taille2 = (*bestiole2).getTaille();
    int distanceCarre = (x2-x1)*(x2-x1) + (y2-y1)*(y2-y1);
-   return (distanceCarre < (taille1)/2 + (taille2)/2);
+   return (distanceCarre < pow((taille1)/2 + (taille2)/2,2));
 }
 
 // Fonction : collision
@@ -166,7 +164,6 @@ bool Bestiole::checkCollision(std::shared_ptr<Bestiole> bestiole2){
 bool Bestiole::collision(){
    double carap = this->coeffCarapace;
    double probaMort = (((double) std::rand())/ (double) RAND_MAX)/carap;
-   cout << "proba de mourir " << probaMort << endl;
    return (probaMort > 0.5);
 }
 
@@ -233,6 +230,8 @@ void Bestiole::cloneFromBestiole(std::shared_ptr<Bestiole>& bestiolePrototype)
    coeffDebuffCarapace=bestiolePrototype->coeffDebuffCarapace;
    coeffNageoire=bestiolePrototype->coeffNageoire;
 } 
+
+
 
  /*********** Getters and setters **********/
 bool Bestiole::hasOreille(){
@@ -318,12 +317,12 @@ bool Bestiole::isDeletedSoon(){
 
 void Bestiole::draw( UImg & support )
 {
-   double         xt = x + cos( orientation )*AFF_SIZE/2.1;
-   double         yt = y - sin( orientation )*AFF_SIZE/2.1;
+   double         xt = x + cos( orientation )*taille/2.1;
+   double         yt = y - sin( orientation )*taille/2.1;
 
 
-   support.draw_ellipse( x, y, AFF_SIZE, AFF_SIZE/5., -orientation/M_PI*180., couleur );
-   support.draw_circle( xt, yt, AFF_SIZE/2., couleur );
+   support.draw_ellipse( x, y, taille, taille/5., -orientation/M_PI*180., couleur );
+   support.draw_circle( xt, yt, taille/2., couleur );
 }
 
  /*********** Déplacements **********/
@@ -376,3 +375,4 @@ void Bestiole::action(Milieu & monMilieu){
 bool operator==( const Bestiole & b1, const Bestiole & b2 ){
    return ( b1.identite == b2.identite );
 }
+

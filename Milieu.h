@@ -52,7 +52,7 @@ public :
    void readConfig( void );
 
    void addMember(std::shared_ptr<Bestiole> b ) { listeBestioles.push_back(b); listeBestioles.back()->initCoords(width, height); }
-   int nbVoisins( const Bestiole & b );
+   
 
 };
 

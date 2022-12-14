@@ -18,10 +18,8 @@ class Bestiole
 {
    
 protected :
-   static const double     AFF_SIZE;
-   static const double     MAX_VITESSE;
-   static const double     LIMITE_VUE;
 
+   static const double     MAX_VITESSE;
    static int              next;
 
 
