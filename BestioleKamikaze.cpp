@@ -1,5 +1,4 @@
 #include "BestioleKamikaze.h"
-#include "Bestiole.h"
 #include <cmath>
 
 double highValue = 300000;

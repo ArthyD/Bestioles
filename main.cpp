@@ -1,8 +1,5 @@
 #include "Aquarium.h"
 #include "Milieu.h"
-#include "Bestiole.h"
-#include "BestiolePeureuse.h"
-#include "BestioleFactory.h"
 #include <iostream>
 #include <fstream>
 

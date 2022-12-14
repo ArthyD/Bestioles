@@ -114,9 +114,10 @@ bool Bestiole::jeTeVois( const Bestiole & b ) const{
          vecteurBestiole.push_back(sin(orientation));
          vecteurEntreBestioles.push_back((b.x-x)/dist);
          vecteurEntreBestioles.push_back((b.y-y)/dist);
-         for(int i=0;i<vecteurBestiole.size();i++){
+         for(long unsigned int i=0; i<vecteurBestiole.size(); i++){
             dotproduct += vecteurBestiole[i] * vecteurEntreBestioles[i];
          }
+
          if (dotproduct<0){
             dotproduct+=1;
          }
@@ -128,6 +129,7 @@ bool Bestiole::jeTeVois( const Bestiole & b ) const{
          }
       }
    }
+   return false;
 }
 
 void Bestiole::rebondit(){

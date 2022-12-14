@@ -48,7 +48,6 @@ public :
    void naissanceAlea( void );
    void addPersoAlea( void ); 
    int randomPerso(void);
-   //bool changePerso(std::shared_ptr<Bestiole> b);
 
    void readConfig( void );
 

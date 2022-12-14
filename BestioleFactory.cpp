@@ -2,7 +2,6 @@
 #include "BestioleFactory.h"
 
 #include <stdlib.h>
-#include <time.h>
 #include <fstream>
 #include <string>
 #include <cmath>

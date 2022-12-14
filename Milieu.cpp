@@ -3,7 +3,6 @@
 #include <cstdlib>
 #include <ctime>
 #include <random>
-#include <iostream>
 #include <fstream>
 #include <string>
 #include <memory>
@@ -80,11 +79,7 @@ void Milieu::readConfig(void)
 // Sortie : rien
 // Action : une étape de simulation
 void Milieu::step( void ){
-   compteur += 1;
-   if (compteur == 7){
    phaseDetection();
-   compteur = 0;
-   }
    phaseAction();
    phaseEnvironnement();
    naissanceAlea();
@@ -95,8 +90,8 @@ bool del(std::shared_ptr<Bestiole> b){
       b= NULL;
       return true;
    }
+   return false;
 }
-//bool estMorte(std::shared_ptr<Bestiole> b) { b->vieillit(); return (b->getAnneesRestantes() <= 0); }
 
 /* Fonction : phaseEnvironnement
 * Entrée : rien
