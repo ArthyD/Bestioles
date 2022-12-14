@@ -7,6 +7,8 @@
 #include <string>
 #include <memory>
 
+#include "Control.h"
+
 const T    Milieu::white[] = { (T)255, (T)255, (T)255 };
 
  /*********** Constructeurs et destructeurs **********/

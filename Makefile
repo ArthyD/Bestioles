@@ -1,5 +1,5 @@
-main : main.cpp Aquarium.o Bestiole.o  BestiolePeureuse.o BestioleGregaire.o BestiolePrevoyante.o BestioleKamikaze.o BestioleFactory.o Milieu.o
-	g++ -Wall -std=c++11 -o main main.cpp Aquarium.o Bestiole.o BestiolePeureuse.o BestioleGregaire.o BestiolePrevoyante.o BestioleKamikaze.o BestioleFactory.o Milieu.o -I . -lX11 -lpthread
+main : main.cpp Aquarium.o Bestiole.o  BestiolePeureuse.o BestioleGregaire.o BestiolePrevoyante.o BestioleKamikaze.o BestioleFactory.o Milieu.o Control.o
+	g++ -Wall -std=c++11 -o main main.cpp Aquarium.o Bestiole.o BestiolePeureuse.o BestioleGregaire.o BestiolePrevoyante.o BestioleKamikaze.o BestioleFactory.o Milieu.o Control.o -I . -lX11 -lpthread
 
 Aquarium.o : Aquarium.h Aquarium.cpp
 	g++ -Wall -std=c++11  -c Aquarium.cpp -I .
@@ -24,6 +24,9 @@ BestioleFactory.o : BestioleFactory.h BestiolePeureuse.h BestioleFactory.cpp
 
 Milieu.o : Milieu.h Milieu.cpp
 	g++ -Wall -std=c++11  -c Milieu.cpp -I .
+
+Control.o : Control.h Control.cpp
+	g++ -Wall -std=c++11  -c Control.cpp -I .
 
 clean:
 	rm -rf *.o main test

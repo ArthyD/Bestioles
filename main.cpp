@@ -2,6 +2,7 @@
 #include "Milieu.h"
 #include <iostream>
 #include <fstream>
+#include "Control.h"
 
 using namespace std;
 
@@ -27,7 +28,6 @@ int main()
         }
    }
    Aquarium       ecosysteme( 640, 480, 30 );
-
    for (int i = 0; i<=nombreBestioles - 1; i++){
       ecosysteme.getMilieu().addPersoAlea();
    }
@@ -35,5 +35,4 @@ int main()
    ecosysteme.run();
 
    return 0;
-
 }
