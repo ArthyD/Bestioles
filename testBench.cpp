@@ -263,11 +263,11 @@ int main()
 {
     cout << "**** Test bench ****" << endl;
    
-    //testAquarium();
-    //testBestiole();
-    //testBestioleGregaire();
-    //testBestioleKamikaze();
-    //testBestiolePeureuse();
+    testAquarium();
+    testBestiole();
+    testBestioleGregaire();
+    testBestioleKamikaze();
+    testBestiolePeureuse();
     testBestiolePrevoyante();
     
     
