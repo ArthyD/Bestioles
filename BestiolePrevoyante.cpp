@@ -37,32 +37,29 @@ BestiolePrevoyante::BestiolePrevoyante(bool pM, double t, int a, double champo, 
 } 
 
 BestiolePrevoyante::~BestiolePrevoyante(){};
+// Fonction update 
+// Entrée : listes des bestioles
+// Sortie : rien
+// Actions : La bestiole prévoyante calcule la moyenne des orientations
+//          des bestioles proches, puis les évite avec un angle de pi/2.
 
 void BestiolePrevoyante::update(vector<std::shared_ptr<Bestiole>>& vectorBestioleProche){
 
     vector<double> mauvaisesOrientations;
+    double moyenne;
+    double nouvorientation;
 
-    for (auto & bestioleProche : vectorBestioleProche){
-        mauvaisesOrientations.push_back(bestioleProche->getOrientation());
+    if(vectorBestioleProche.size() >= 0){
+        for (auto & bestioleProche : vectorBestioleProche){
+        moyenne += bestioleProche->getOrientation();
     }
-
-    std::sort (mauvaisesOrientations.begin(), mauvaisesOrientations.end());
-    double meilleurEcart = 0;
-    double meilleureOrientation = orientation;
-    double ecart;
-    for (std::vector<double>::iterator it = mauvaisesOrientations.begin() ; it!= mauvaisesOrientations.end(); ++it) {
-        ecart = *(it+1) - *it;
-
-        if (ecart > meilleurEcart) {
-            meilleurEcart = ecart;
-            meilleureOrientation = (*(it) + *(it+1)) / 2;
+        if ((moyenne - orientation)<0.001){
+            if (orientation<M_PI_2){
+                orientation += M_PI_2;
+            } else {
+                orientation -= M_PI_2;
+            }
         }
     }
-    if(mauvaisesOrientations.size() != 0){
-        if (2*M_PI + *(mauvaisesOrientations.begin()) - *(mauvaisesOrientations.end()) > meilleurEcart) {
-            meilleureOrientation = ((*(mauvaisesOrientations.begin()) + *(mauvaisesOrientations.end()) ) / 2) + M_PI;
-        }
-    }
-
-    orientation = meilleureOrientation;
+    
 }
