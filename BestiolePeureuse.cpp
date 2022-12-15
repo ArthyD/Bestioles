@@ -52,9 +52,12 @@ BestiolePeureuse::BestiolePeureuse(bool pM, double t, int a, double champo, doub
 void BestiolePeureuse::setAgoraphobie(int agor){
     agoraphobe = agor;
 }
-
-
-
+// Fonction update 
+// Entrée : listes des bestioles
+// Sortie : rien
+// Actions : A partir d'un certain nombre de bestioles, la bestiole peureuse devient folle et
+//          fuit dans l'autre sens que la moyenne des bestioles proches d'elle pendant un 
+//          temps donné
 void BestiolePeureuse::update(std::vector<std::shared_ptr<Bestiole>>& vectorBestioleProche){
     if (fuite){
         if (compteur == 0) {
