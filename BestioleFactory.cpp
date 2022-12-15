@@ -59,7 +59,7 @@ void BestioleFactory::readConfig(void)
             if (champ == "Champ Oeil Maximal") {
              champOeilMax = valeur;
             }
-            if (champ == "Champ Oeil Mininal") {
+            if (champ == "Champ Oeil Minimal") {
                 champOeilMin = valeur;
             }
             if (champ == "Distance de vue Maximale") {
@@ -71,10 +71,10 @@ void BestioleFactory::readConfig(void)
             if (champ == "Capacite Oeil Maximale") {
              capaciteOeilMax = valeur;
             }
-            if (champ == "Capacite Oeil Mininale") {
+            if (champ == "Capacite Oeil Minimale") {
              capaciteOeilMin = valeur;
             }
-            if (champ == "Distance Oreille Mininale") {
+            if (champ == "Distance Oreille Minimale") {
               distanceOreilleMin = valeur;
             }
             if (champ == "Distance Oreille Maximale") {
@@ -98,7 +98,7 @@ void BestioleFactory::readConfig(void)
             if (champ == "Coefficient Camouflage Maximal") {
              coeffCamouflageMax = valeur;
             }
-            if (champ == "Coefficient Camouflage Mininmal") {
+            if (champ == "Coefficient Camouflage Minimal") {
              coeffCamouflageMin = valeur;
             }
             if (champ == "Agoraphobie Minimale") {
