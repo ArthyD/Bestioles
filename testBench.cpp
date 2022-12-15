@@ -236,8 +236,16 @@ void testBestiolePrevoyante(){
     cout<< "*** Test BestiolePrevoyante.cpp***"<<endl;
     cout<< "*** Test du premier constructeur***"<<endl;
     //A faire
-    cout<< "*** Test update peureuse***"<<endl;
-    //A faire
+    cout<< "*** Test update prevoyante***"<<endl;
+    BestioleFactory* factory = new BestioleFactory();
+    shared_ptr<Bestiole> bestiole = factory->creationBestiole(false,4,true,false,false,false,false);
+    BestiolePrevoyante* bestiolePrevoyante = new BestiolePrevoyante(false,2,1,0,0,0,0,0,0,0,0,0);
+    vector<std::shared_ptr<Bestiole>> bestioleProche = {bestiole};
+    (*bestiole).setOrientation(0.75);
+    bestiolePrevoyante->setOrientation(0);
+    bestiolePrevoyante->update(bestioleProche);
+    test(bestiolePrevoyante->getOrientation()<=1.58,"L'update doit changer l'orientation");
+    bestiolePrevoyante->~BestiolePrevoyante();
 
 }
 
@@ -257,9 +265,10 @@ int main()
    
     //testAquarium();
     //testBestiole();
-    testBestioleGregaire();
-    testBestioleKamikaze();
-    testBestiolePeureuse();
+    //testBestioleGregaire();
+    //testBestioleKamikaze();
+    //testBestiolePeureuse();
+    testBestiolePrevoyante();
     
     
 
